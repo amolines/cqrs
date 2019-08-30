@@ -1,19 +1,19 @@
 language: csharp
 mono: none
-solution: CQRS.sln
+solution: Xendor.sln
 sudo: required
 dist: xenial
 dotnet: 2.2
 install:
   - dotnet tool install --global dotnet-sonarscanner
   - dotnet tool install --global coverlet.console
-  - dotnet restore CQRS.sln
+  - dotnet restore Xendor.sln
 before_script:
   - export PATH="$PATH:$HOME/.dotnet/tools"
 script:
   - dotnet sonarscanner begin /k:"$ORGANIZATION_KEY:$PROJECT_KEY" /n:"$PROJECT_KEY" /v:"0.0.1" /o:"$ORGANIZATION_KEY" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_KEY" /d:sonar.language="cs" /d:sonar.exclusions="**/bin/**/*,**/obj/**/*" /d:sonar.cs.opencover.reportsPaths="test/coverage.opencover.xml" /d:sonar.coverage.exclusions="test/**" || true
-  - dotnet build CQRS.sln
-  - dotnet test CQRS.sln --filter Tests  --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover  /p:CoverletOutput=../coverage.opencover.xml /p:Exclude=\"[xunit*]*,[*.Tests]*\"
+  - dotnet build Xendor.sln
+  - dotnet test Xendor.sln --filter Tests  --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover  /p:CoverletOutput=../coverage.opencover.xml /p:Exclude=\"[xunit*]*,[*.Tests]*\"
   - dotnet sonarscanner end /d:sonar.login="$SONAR_KEY" || true
 global:
   - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
