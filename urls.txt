@@ -1,0 +1,85 @@
+﻿Microservice Architecture
+https://microservices.io/patterns/data/cqrs.html
+https://microservices.io/patterns/data/event-sourcing.html
+https://microservices.io/patterns/data/database-per-service.html
+https://microservices.io/patterns/microservices.html
+https://microservices.io/patterns/data/api-composition.html
+https://microservices.io/patterns/data/saga.html
+
+Domain-Driven Design, My Top 5 Best Practices
+https://www.codeproject.com/Articles/1131462/Domain-Driven-Design-My-Top-Best-Practices
+1- Always Start with the Requirements & Modeling
+2- Keep Your Aggregate Roots Flat Whenever Possible
+3- Domain Model != Read Model
+4- Domain Events are Immutable Facts
+5- Aggregate Roots Can't Access Repositories
+Codigo de ejemplo:
+http://www.zankavtaskin.com/2013/09/applied-domain-driven-design-ddd-part-1.html
+https://github.com/zkavtaskin/Domain-Driven-Design-Example
+
+
+Introduction to CQRS
+https://www.codeproject.com/Articles/555855/Introduction-to-CQRS
+CQRS : A Cross Examination Of How It Works
+https://www.codeproject.com/articles/991648/cqrs-a-cross-examination-of-how-it-works#Event-Versioning
+Real-World CQRS/ES with ASP.NET and Redis
+https://exceptionnotfound.net/real-world-cqrs-es-with-asp-net-and-redis-part-1-overview/
+Eventos de dominio: diseño e implementación
+https://docs.microsoft.com/es-es/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/domain-events-design-implementation
+Diseño de validaciones en el nivel de modelo de dominio
+https://docs.microsoft.com/es-es/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/domain-model-layer-validations
+Event Sourcing and Snapshots
+https://blog.jonathanoliver.com/event-sourcing-and-snapshots/
+CODE BETTER – DDD – What, WHY
+https://www.linkedin.com/pulse/code-better-ddd-what-why-balazs-hideghety/
+Commands, Command Handlers and Command Dispatcher
+https://weblogs.asp.net/shijuvarghese/cqrs-commands-command-handlers-and-command-dispatcher
+A Saga on Sagas
+https://msdn.microsoft.com/en-us/library/jj591569.aspx
+What is an aggregate?
+http://cqrs.nu/Faq/aggregates
+CQRS-Simple-Architecture, tiene muchos enlaces buenos
+https://www.codeproject.com/Articles/1004612/CQRS-Simple-Architecture
+
+Temas de arquitectura
+https://buildplease.com/
+Primary Keys: IDs versus GUIDs: https://blog.codinghorror.com/primary-keys-ids-versus-guids/
+Microservices Architecture and Containers based Reference Application : 
+https://github.com/dotnet-architecture/eShopOnContainers
+
+Librerias
+https://github.com/NEventStore
+https://github.com/danielgerlag/workflow-core
+https://github.com/ardalis/GuardClauses
+https://github.com/App-vNext/Polly
+https://github.com/Xabaril/BeatPulse
+https://github.com/ThreeMammals/Ocelot
+https://aspnetboilerplate.com/
+
+Muy Bueno
+https://enterprisecraftsmanship.com/2016/09/08/domain-services-vs-application-services/
+https://enterprisecraftsmanship.com/2016/08/25/what-is-domain-logic/
+https://enterprisecraftsmanship.com/2019/01/31/cqrs-commands-part-domain-model/
+https://enterprisecraftsmanship.com/2015/04/13/dto-vs-value-object-vs-poco/
+https://enterprisecraftsmanship.com/2019/02/20/validate-commands-cqrs/
+https://enterprisecraftsmanship.com/2016/09/13/validation-and-ddd/
+https://enterprisecraftsmanship.com/2019/04/15/cqrs-exception-handling/
+
+
+
+
+Resumen: http://cqrs.nu/Faq
+
+
+
+
+https://altkomsoftware.pl/en/blog/cqrs-event-sourcing/#_9
+https://github.com/asc-lab/dotnetcore-microservices-poc
+https://github.com/asc-lab/dotnet-cqrs-intro
+
+YouTube
+Scaling Event Sourcing for Netflix Downloads : https://www.youtube.com/watch?v=rsSld8NycCU&t=315s
+YOW! Nights March 2016 Martin Fowler - Event Sourcing: https://www.youtube.com/watch?v=aweV9FLTZkU
+DDD and Event Sourcing using ASP.NET Core, MediatR, SignalR and Angular.: https://www.youtube.com/watch?v=Bb4zwjzeA2M
+
+https://en.wikipedia.org/wiki/Event_storming

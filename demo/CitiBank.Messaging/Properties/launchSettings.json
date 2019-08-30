@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CitiBank.Messaging": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

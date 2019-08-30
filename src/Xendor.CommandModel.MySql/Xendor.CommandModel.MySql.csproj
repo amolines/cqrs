@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Xendor.CommandModel\Xendor.CommandModel.csproj" />
+    <ProjectReference Include="..\Xendor.Data.MySql\Xendor.Data.MySql.csproj" />
+  </ItemGroup>
+
+</Project>
