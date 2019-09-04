@@ -1,25 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using MassTransit;
-using Newtonsoft.Json;
 using Xendor.Data;
 
 namespace Xendor.EventBus.RabbitMQ
 {
-
-    //public class EventJsonConverter : JsonConverter<Dictionary<string,object>>
-    //{
-    //    public override void WriteJson(JsonWriter writer, Dictionary<string, object> value, JsonSerializer serializer)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-
-    //    public override Dictionary<string, object> ReadJson(JsonReader reader, Type objectType, Dictionary<string, object> existingValue, bool hasExistingValue,
-    //        JsonSerializer serializer)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
 
     public  class RabbitMqConnectionString : Connection
     {
@@ -55,11 +39,6 @@ namespace Xendor.EventBus.RabbitMQ
                     hst.Username(UserName);
                     hst.Password(Password);
                 });
-                //cfg.ConfigureJsonDeserializer(settings =>
-                //{
-                //    settings.Converters.Add(new EventJsonConverter());
-                //    return settings;
-                //});
                 cfg.ReceiveEndpoint(host, queueName, e =>
                     e.Consumer(consumerFactoryMethod));
             });

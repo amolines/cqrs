@@ -21,5 +21,7 @@ namespace Xendor.MessageBroker
         public long TimeStamp { get;  }
         public IDictionary<string, object> Payload { get; }
         public string ContentType { get; }
+
+        
     }
 }

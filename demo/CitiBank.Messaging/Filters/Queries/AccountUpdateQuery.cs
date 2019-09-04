@@ -11,8 +11,8 @@ namespace CitiBank.Messaging.Filters.Queries
 
         }
         public override string Sql =>
-            " SELECT  @AccountId := id from account where AggregateId = @AggregateId; " +
-            " INSERT INTO operation (Date, Amount,Description, AccountId) VALUES  (@Date, @Amount, @Description, @AccountId); " +
-            " UPDATE account SET Version = @Version, TimeStamp = @TimeStamp WHERE  Id = @AccountId; ";
+            " SELECT  @AccountId := id from accounts where AggregateId = @AggregateId; " +
+            " INSERT INTO operations (Date, Amount,Description, AccountId) VALUES  (@Date, @Amount, @Description, @AccountId); " +
+            " UPDATE accounts SET Version = @Version, TimeStamp = @TimeStamp WHERE  Id = @AccountId; ";
     }
 }

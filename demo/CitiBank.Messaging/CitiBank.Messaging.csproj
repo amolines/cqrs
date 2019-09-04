@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Xendor.Data.MySql\Xendor.Data.MySql.csproj" />
     <ProjectReference Include="..\..\src\Xendor.EventBus.RabbitMQ\Xendor.EventBus.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\src\Xendor.MessageBroker.MySql\Xendor.MessageBroker.MySql.csproj" />
     <ProjectReference Include="..\..\src\Xendor.MessageModel\Xendor.MessageModel.csproj" />
     <ProjectReference Include="..\..\src\Xendor.ServiceLocator.SimpleInjector\Xendor.ServiceLocator.SimpleInjector.csproj" />
     <ProjectReference Include="..\CitiBank.Domain\CitiBank.Domain.csproj" />

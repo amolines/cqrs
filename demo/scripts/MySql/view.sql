@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2019-08-26 10:26:07
+Date: 2019-09-03 11:49:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for account
+-- Table structure for accounts
 -- ----------------------------
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE `account` (
+DROP TABLE IF EXISTS `accounts`;
+CREATE TABLE `accounts` (
   `Id` int(255) NOT NULL AUTO_INCREMENT,
   `AggregateId` char(36) NOT NULL,
   `Version` int(11) NOT NULL,
@@ -30,15 +30,24 @@ CREATE TABLE `account` (
   PRIMARY KEY (`Id`),
   KEY `fk_clientId` (`ClientId`),
   KEY `fk_productId` (`ProductId`),
-  CONSTRAINT `fk_clientId` FOREIGN KEY (`ClientId`) REFERENCES `client` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_productId` FOREIGN KEY (`ProductId`) REFERENCES `product` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_clientId` FOREIGN KEY (`ClientId`) REFERENCES `clients` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_productId` FOREIGN KEY (`ProductId`) REFERENCES `products` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for client
+-- Table structure for accounts.version
 -- ----------------------------
-DROP TABLE IF EXISTS `client`;
-CREATE TABLE `client` (
+DROP TABLE IF EXISTS `accounts.version`;
+CREATE TABLE `accounts.version` (
+  `AggregateId` char(36) NOT NULL,
+  `Version` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for clients
+-- ----------------------------
+DROP TABLE IF EXISTS `clients`;
+CREATE TABLE `clients` (
   `Id` int(255) NOT NULL AUTO_INCREMENT,
   `AggregateId` char(36) NOT NULL,
   `Version` int(11) NOT NULL,
@@ -48,13 +57,22 @@ CREATE TABLE `client` (
   `Email` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`),
   FULLTEXT KEY `search` (`Name`,`LastName`,`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for operation
+-- Table structure for clients.version
 -- ----------------------------
-DROP TABLE IF EXISTS `operation`;
-CREATE TABLE `operation` (
+DROP TABLE IF EXISTS `clients.version`;
+CREATE TABLE `clients.version` (
+  `AggregateId` char(36) NOT NULL,
+  `Version` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for operations
+-- ----------------------------
+DROP TABLE IF EXISTS `operations`;
+CREATE TABLE `operations` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Date` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   `Amount` double(255,0) NOT NULL,
@@ -62,14 +80,14 @@ CREATE TABLE `operation` (
   `AccountId` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `fk_accountId` (`AccountId`),
-  CONSTRAINT `fk_accountId` FOREIGN KEY (`AccountId`) REFERENCES `account` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+  CONSTRAINT `fk_accountId` FOREIGN KEY (`AccountId`) REFERENCES `accounts` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for product
+-- Table structure for products
 -- ----------------------------
-DROP TABLE IF EXISTS `product`;
-CREATE TABLE `product` (
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE `products` (
   `Id` int(255) NOT NULL AUTO_INCREMENT,
   `AggregateId` char(36) NOT NULL,
   `Version` int(11) NOT NULL,
@@ -77,17 +95,26 @@ CREATE TABLE `product` (
   `Name` varchar(255) NOT NULL,
   `ProductType` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- View structure for query.account
+-- Table structure for products.version
 -- ----------------------------
-DROP VIEW IF EXISTS `query.account`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`dbuser`@`%` SQL SECURITY DEFINER VIEW `query.account` AS select `account`.`AggregateId` AS `AggregateId`,`account`.`Number` AS `number`,`product`.`AggregateId` AS `product.AggregateId`,`product`.`Name` AS `product.name`,`client`.`AggregateId` AS `client.AggregateId`,`client`.`Name` AS `client.name`,`client`.`LastName` AS `client.lastName`,`client`.`Email` AS `client.email`,`account`.`Id` AS `Id` from ((`account` join `client` on((`account`.`ClientId` = `client`.`Id`))) join `product` on((`account`.`ProductId` = `product`.`Id`))) ;
+DROP TABLE IF EXISTS `products.version`;
+CREATE TABLE `products.version` (
+  `AggregateId` char(36) NOT NULL,
+  `Version` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- View structure for query.operation
+-- View structure for view.accounts
 -- ----------------------------
-DROP VIEW IF EXISTS `query.operation`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`dbuser`@`%` SQL SECURITY DEFINER VIEW `query.operation` AS select `operation`.`Date` AS `Date`,`operation`.`Amount` AS `Amount`,`operation`.`Description` AS `Description`,`operation`.`AccountId` AS `AccountId` from `operation` ;
+DROP VIEW IF EXISTS `view.accounts`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`dbuser`@`%` SQL SECURITY DEFINER VIEW `view.accounts` AS select `accounts`.`AggregateId` AS `AggregateId`,`accounts`.`Number` AS `number`,`products`.`AggregateId` AS `product.AggregateId`,`products`.`Name` AS `product.name`,`clients`.`AggregateId` AS `client.AggregateId`,`clients`.`Name` AS `client.name`,`clients`.`LastName` AS `client.lastName`,`clients`.`Email` AS `client.email`,`accounts`.`Id` AS `Id` from ((`accounts` join `clients` on((`accounts`.`ClientId` = `clients`.`Id`))) join `products` on((`accounts`.`ProductId` = `products`.`Id`))) ;
+
+-- ----------------------------
+-- View structure for view.operations
+-- ----------------------------
+DROP VIEW IF EXISTS `view.operations`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`dbuser`@`%` SQL SECURITY DEFINER VIEW `view.operations` AS select `operations`.`Date` AS `Date`,`operations`.`Amount` AS `Amount`,`operations`.`Description` AS `Description`,`operations`.`AccountId` AS `AccountId` from `operations` ;
 SET FOREIGN_KEY_CHECKS=1;

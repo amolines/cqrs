@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2019-08-26 10:26:21
+Date: 2019-09-03 11:49:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `accounts_event` (
   `Payload` json NOT NULL,
   `ContentType` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for accounts_snapshot
@@ -40,7 +40,7 @@ CREATE TABLE `accounts_snapshot` (
   `Payload` json NOT NULL,
   `ContentType` varchar(255) NOT NULL,
   PRIMARY KEY (`MessageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for clients_event
@@ -54,7 +54,7 @@ CREATE TABLE `clients_event` (
   `Payload` json NOT NULL,
   `ContentType` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for clients_snapshot
@@ -67,7 +67,7 @@ CREATE TABLE `clients_snapshot` (
   `Payload` json NOT NULL,
   `ContentType` varchar(255) NOT NULL,
   PRIMARY KEY (`MessageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for integrationEventLog
@@ -95,7 +95,7 @@ CREATE TABLE `products_event` (
   `Payload` json NOT NULL,
   `ContentType` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for products_snapshot
@@ -108,5 +108,5 @@ CREATE TABLE `products_snapshot` (
   `Payload` json NOT NULL,
   `ContentType` varchar(255) NOT NULL,
   PRIMARY KEY (`MessageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 SET FOREIGN_KEY_CHECKS=1;

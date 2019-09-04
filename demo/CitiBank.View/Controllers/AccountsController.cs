@@ -48,10 +48,8 @@ namespace CitiBank.View.Controllers
             {
                return  (AccountDto)query.Data.GetEnumerator().Current; 
             }
-            else
-            {
-                return NotFound();
-            }
+
+            return NotFound();
 
         }
     }
