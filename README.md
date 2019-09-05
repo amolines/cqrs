@@ -69,35 +69,35 @@ These events are related to user registrations and look like:
 UserAddedToAccount 
 ```json
 {
-    "userId" = 150,
-	"accountId" = 47,
-	"username" = "spam-me-not",
-	"registrationToken" = "27fa3h…" 
+    "userId" : 55,
+	"username" : "alemol",
+	"name":"Alejandro",
+	"lastName":"Moline"
 }
 ```
 UserVerifiedEmail
 ```json
 {
-    "userId" = 150,
-	"email" = "rinat.abdullin@gmail.com"
+    "userId" : 55,
+	"email" : "alemol32@gmail.com"
 }
 ```
-UserRenamed
+UserUpdated
 ```json
 {
-    "userId" = 150,
-	"newName" = "abdullin"
+    "userId" : 55,
+	"lastName" : "Molines"
 }
 ```
 We can attach a subscriber to stream of these events to project this stream into a persistent read model, used to serve user details in a Web UI.
 Final read model could look like:
 ```json
 {
-  "userId": 150,
-  "accountId": 74,
-  "username": "abdullin",
-  "email": "rinat.abdullin@gmail.com",
-  "registrationToken": "27fa3h..."
+  "userId": 55,
+  "username": "alemol",
+  "email": "alemol32@gmail.com",
+  "name": "Alejandro",
+  "lastName":"Molines"
 }
 ```
  # CQRS with Event Sourcing (CQRS-ES)
