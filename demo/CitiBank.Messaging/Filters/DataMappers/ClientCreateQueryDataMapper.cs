@@ -11,12 +11,10 @@ namespace CitiBank.Messaging.Filters.DataMappers
         {
             IDictionary<string, object> parameters = new Dictionary<string, object>
             {
-                { "@AggregateId", source.AggregateId},
-                { "@Version", source.Version },
-                { "@TimeStamp", source.TimeStamp },
-                { "@Name", source.Payload["FirstName"] },
-                { "@LastName", source.Payload["LastName"] },
-                { "@Email", source.Payload["Email"] }
+                {"@AggregateId", source.AggregateId},
+                {"@Name", source.Payload["FirstName"]},
+                {"@LastName", source.Payload["LastName"]},
+                {"@Email", source.Payload["Email"]}
             };
             return new ClientCreateQuery(parameters);
         }

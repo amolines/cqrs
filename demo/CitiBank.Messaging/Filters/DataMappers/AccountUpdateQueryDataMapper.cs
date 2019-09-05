@@ -19,8 +19,6 @@ namespace CitiBank.Messaging.Filters.DataMappers
             IDictionary<string, object> parameters = new Dictionary<string, object>
             {
                 { "@AggregateId", source.AggregateId},
-                { "@Version", source.Version },
-                { "@TimeStamp", source.TimeStamp },
                 { "@Date", date },
                 { "@Description", source.Payload["Description"] },
                 { "@Amount", source.Payload["Amount"] }

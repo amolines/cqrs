@@ -58,9 +58,43 @@ Instead of storing just the current state of the data in a domain, use an append
 -	event schema changes is much harder than in case of relational model (lack of standard schema migration tools)
 -	you must consider versioning handling from the beginning.
 
+##Event Sourcing - Projections
+Projection is an important concept while building event-centric systems. At the same time, it is extremely simple.
+>Projection is about deriving current state from the stream of events.
+For instance, consider a situation, where a stream of events is published out by a server to all subscribers.
+These events are related to user registrations and look like:
+```json
+UserAddedToAccount 
+{
+    UserId = 150,
+	AccountId = 47,
+	Username = "spam-me-not",
+	RegistrationToken = "27fa3h…" 
+}
+UserVerifiedEmail
+{
+    UserId = 150,
+	Email = "rinat.abdullin@gmail.com"
+}
+UserRenamed
+{
+    UserId = 150,
+	NewName = "abdullin"
+}
+```
+We can attach a subscriber to stream of these events to project this stream into a persistent read model, used to serve user details in a Web UI.
+Final read model could look like:
+```json
+{
+  "UserId": 150,
+  "AccountId": 74,
+  "Username": "abdullin",
+  "Email": "rinat.abdullin@gmail.com",
+  "RegistrationToken": "27fa3h..."
+}
+```
  # CQRS with Event Sourcing (CQRS-ES)
 ![alt text](https://raw.githubusercontent.com/amolines/cqrs/develop/CQRS-ES.png)
-
 
 
 

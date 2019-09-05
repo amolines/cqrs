@@ -5,6 +5,6 @@ namespace Xendor.MessageBroker
 {
     public interface IVersionService
     {
-        Task SaveAndCreate(Guid aggregateId, int number);
+        Task SaveAndCreate(IEnvelope envelope);
     }
 }

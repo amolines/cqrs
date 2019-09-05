@@ -35,7 +35,7 @@ namespace Xendor.MessageModel.MessageBroker
                 try
                 {
                     var versionService = _versionServiceFactoryMethod(unitOfWork,envelope.ContentType.Split('.')[0]);
-                    await versionService.SaveAndCreate(envelope.AggregateId, envelope.Version);
+                    await versionService.SaveAndCreate(envelope);
                     var filter = _filters.FirstOrDefault(f => f.Binding["contentType"].Value.Equals(envelope.ContentType));
                     if (filter != null)
                     {

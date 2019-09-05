@@ -32,6 +32,8 @@ namespace CitiBank.Messaging
             messageBroker.Bind<ClientCreateQueryMessageFilter>();
             messageBroker.Bind<AccountCreateQueryMessageFilter>();
             messageBroker.Bind<AccountUpdateQueryMessageFilter>();
+            messageBroker.Bind<ClientUpdateQueryMessageFilter>();
+
 
             var rabbitConnectionStringSection = configuration.GetSection("rabbitConnectionString");
             var rabbitMqConnectionString = rabbitConnectionStringSection.Get<RabbitMqConnectionString>();
@@ -41,6 +43,7 @@ namespace CitiBank.Messaging
             var eventBus = new RabbitMqEventBus(rabbitMqConnectionString);
             eventBus.Subscribe("ProductCreated", ProductCreatedEventConsumer.ConsumerFactory(messageBroker));
             eventBus.Subscribe("ClientCreated", ClientCreatedEventConsumer.ConsumerFactory(messageBroker));
+            eventBus.Subscribe("ClientUpdated", ClientUpdatedEventConsumer.ConsumerFactory(messageBroker));
             eventBus.Subscribe("AccountCreated", AccountCreatedEventConsumer.ConsumerFactory(messageBroker));
             eventBus.Subscribe("AccountBalanceChanged", AccountBalanceChangedEventConsumer.ConsumerFactory(messageBroker));
             eventBus.Subscribe("AccountTransfered", AccountTransferedEventConsumer.ConsumerFactory(messageBroker));

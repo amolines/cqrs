@@ -12,12 +12,12 @@ namespace Xendor.MessageBroker
         {
             _versionRepository = versionRepository;
         }
-        private async Task CreateVersion(Guid aggregateId, int number)
+        private async Task CreateVersion(Guid aggregateId, int number, long timeStamp)
         {
             var value = await CurrentVersion(aggregateId);
             if (value.Equals(0))
             {
-                var version = new Version(aggregateId, number);
+                var version = new Version(aggregateId, number, timeStamp);
                 await _versionRepository.Create(version);
             }
             else
@@ -30,7 +30,7 @@ namespace Xendor.MessageBroker
             var version = await _versionRepository.GetVersion(aggregateId);
             return version?.Number ?? 0;
         }
-        private async Task ChangeVersion(Guid aggregateId, int number)
+        private async Task ChangeVersion(Guid aggregateId, int number, long timeStamp)
         {
             var value = await CurrentVersion(aggregateId);
             if (value.Equals(0))
@@ -40,7 +40,7 @@ namespace Xendor.MessageBroker
 
             if (number > value)
             {
-                await _versionRepository.Update(new Version(aggregateId, number));
+                await _versionRepository.Update(new Version(aggregateId, number, timeStamp));
             }
             else
             {
@@ -49,22 +49,22 @@ namespace Xendor.MessageBroker
 
 
         }
-        public async Task SaveAndCreate(Guid aggregateId, int number)
+        public async Task SaveAndCreate(IEnvelope envelope)
         {
-            var version = await CurrentVersion(aggregateId);
+            var version = await CurrentVersion(envelope.AggregateId);
             if (version.Equals(0))
             {
-                await CreateVersion(aggregateId, number);
+                await CreateVersion(envelope.AggregateId, envelope.Version, envelope.TimeStamp);
             }
             else
             {
-                if (number == version + 1)
+                if (envelope.Version == version + 1)
                 {
-                    await ChangeVersion(aggregateId, number);
+                    await ChangeVersion(envelope.AggregateId, envelope.Version, envelope.TimeStamp);
                 }
                 else
                 {
-                    throw new VersionInvalidException(aggregateId, version, number);
+                    throw new VersionInvalidException(envelope.AggregateId, version, envelope.Version);
                 }
             }
         }

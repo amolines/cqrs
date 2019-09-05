@@ -12,7 +12,8 @@ namespace Xendor.MessageBroker.Data
             {
                 var id = source.GetGuid(0);
                 var number = source.GetInt16(1);
-                version = new Version(id, number);
+                var timeStamp = source.GetInt64(2);
+                version = new Version(id, number, timeStamp);
             }
             return version;
         }

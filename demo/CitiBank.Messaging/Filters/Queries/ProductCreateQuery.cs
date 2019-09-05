@@ -11,8 +11,8 @@ namespace CitiBank.Messaging.Filters.Queries
 
         }
         public override string Sql =>
-            "INSERT INTO products (AggregateId, Version,TimeStamp, Name, ProductType) " +
+            "INSERT INTO products (AggregateId,  Name, ProductType) " +
             "VALUES " +
-            " (@AggregateId, @Version, @TimeStamp, @Name, @ProductType)";
+            " (@AggregateId,  @Name, @ProductType)";
     }
 }

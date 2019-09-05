@@ -13,8 +13,8 @@ namespace CitiBank.Messaging.Filters.Queries
         public override string Sql =>
             "SELECT  @ClientId := id from clients where AggregateId = @ClientAggregateId; " +
             "SELECT  @ProductId := id from products where AggregateId = @ProductAggregateId; " +
-            "INSERT INTO accounts (AggregateId, Version,TimeStamp, Number, ClientId, ProductId) " +
+            "INSERT INTO accounts (AggregateId, Number, ClientId, ProductId) " +
             "VALUES " +
-            " (@AggregateId, @Version, @TimeStamp, @Number, @ClientId, @ProductId)";
+            " (@AggregateId, @Number, @ClientId, @ProductId)";
     }
 }

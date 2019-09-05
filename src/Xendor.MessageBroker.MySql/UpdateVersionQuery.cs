@@ -8,14 +8,11 @@ namespace Xendor.MessageBroker.MySql
     {
         private readonly string _aggregateName;
 
-        public UpdateVersionQuery(Guid aggregateId, int version, string aggregateName)
-            : base(new Dictionary<string, object>() {{"@AggregateId", aggregateId}, {"@Version", version}})
+        public UpdateVersionQuery(Guid aggregateId, int version, long timeStamp, string aggregateName)
+            : base(new Dictionary<string, object>() {{"@AggregateId", aggregateId}, {"@Version", version}, { "@TimeStamp", timeStamp } })
         {
             _aggregateName = aggregateName;
         }
-        /// <summary>
-        /// UPDATE account SET Version = @Version, TimeStamp = @TimeStamp WHERE  Id = @AccountId; 
-        /// </summary>
-        public override string Sql => $"UPDATE  `{_aggregateName}s.version` SET Version = @Version WHERE AggregateId = @AggregateId";
+        public override string Sql => $"UPDATE  `{_aggregateName}s.version` SET Version = @Version, TimeStamp = @TimeStamp WHERE AggregateId = @AggregateId";
     }
 }

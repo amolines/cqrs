@@ -19,12 +19,12 @@ namespace Xendor.MessageBroker.MySql
 
         protected override IQuery InitUpdateVersionQuery(IVersion version, string aggregateName)
         {
-            return new UpdateVersionQuery(version.AggregateId, version.Number, aggregateName);
+            return new UpdateVersionQuery(version.AggregateId, version.Number,version.TimeStamp, aggregateName);
         }
 
         protected override IQuery InitInsertVersionQuery(IVersion version, string aggregateName)
         {
-            return new InsertVersionQuery(version.AggregateId, version.Number, aggregateName);
+            return new InsertVersionQuery(version.AggregateId, version.Number, version.TimeStamp, aggregateName);
         }
     }
 }

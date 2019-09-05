@@ -13,6 +13,6 @@ namespace Xendor.MessageBroker.MySql
         {
             _aggregateName = aggregateName;
         }
-        public override string Sql => $"SELECT  Version FROM  `{_aggregateName}s.version` WHERE AggregateId = @AggregateId";
+        public override string Sql => $"SELECT  AggregateId,Version, TimeStamp FROM  `{_aggregateName}s.version` WHERE AggregateId = @AggregateId";
     }
 }

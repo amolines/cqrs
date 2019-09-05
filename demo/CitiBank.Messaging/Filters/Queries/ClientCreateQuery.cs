@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Xendor.Data;
 
 namespace CitiBank.Messaging.Filters.Queries
@@ -11,8 +12,8 @@ namespace CitiBank.Messaging.Filters.Queries
 
         }
         public override string Sql =>
-            "INSERT INTO clients (AggregateId, Version,TimeStamp, Name, LastName, Email) " +
+            "INSERT INTO clients (AggregateId, Name, LastName, Email) " +
             "VALUES " +
-            " (@AggregateId, @Version, @TimeStamp, @Name, @LastName, @Email)";
+            " (@AggregateId,  @Name, @LastName, @Email)";
     }
 }

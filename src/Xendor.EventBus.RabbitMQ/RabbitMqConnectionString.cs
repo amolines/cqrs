@@ -40,7 +40,9 @@ namespace Xendor.EventBus.RabbitMQ
                     hst.Password(Password);
                 });
                 cfg.ReceiveEndpoint(host, queueName, e =>
-                    e.Consumer(consumerFactoryMethod));
+                {
+                    e.Consumer(consumerFactoryMethod);
+                });
             });
             return bus;
         }

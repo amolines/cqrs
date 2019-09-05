@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2019-09-03 11:49:36
+Date: 2019-09-05 08:26:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,8 +22,6 @@ DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE `accounts` (
   `Id` int(255) NOT NULL AUTO_INCREMENT,
   `AggregateId` char(36) NOT NULL,
-  `Version` int(11) NOT NULL,
-  `TimeStamp` double NOT NULL,
   `Number` char(20) NOT NULL,
   `ClientId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
@@ -40,7 +38,8 @@ CREATE TABLE `accounts` (
 DROP TABLE IF EXISTS `accounts.version`;
 CREATE TABLE `accounts.version` (
   `AggregateId` char(36) NOT NULL,
-  `Version` int(11) NOT NULL
+  `Version` int(11) NOT NULL,
+  `TimeStamp` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -50,14 +49,12 @@ DROP TABLE IF EXISTS `clients`;
 CREATE TABLE `clients` (
   `Id` int(255) NOT NULL AUTO_INCREMENT,
   `AggregateId` char(36) NOT NULL,
-  `Version` int(11) NOT NULL,
-  `TimeStamp` double NOT NULL,
   `Name` varchar(255) NOT NULL,
   `LastName` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`),
   FULLTEXT KEY `search` (`Name`,`LastName`,`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Table structure for clients.version
@@ -65,7 +62,8 @@ CREATE TABLE `clients` (
 DROP TABLE IF EXISTS `clients.version`;
 CREATE TABLE `clients.version` (
   `AggregateId` char(36) NOT NULL,
-  `Version` int(11) NOT NULL
+  `Version` int(11) NOT NULL,
+  `TimeStamp` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
@@ -90,8 +88,6 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `Id` int(255) NOT NULL AUTO_INCREMENT,
   `AggregateId` char(36) NOT NULL,
-  `Version` int(11) NOT NULL,
-  `TimeStamp` double NOT NULL,
   `Name` varchar(255) NOT NULL,
   `ProductType` varchar(255) NOT NULL,
   PRIMARY KEY (`Id`)
@@ -103,7 +99,8 @@ CREATE TABLE `products` (
 DROP TABLE IF EXISTS `products.version`;
 CREATE TABLE `products.version` (
   `AggregateId` char(36) NOT NULL,
-  `Version` int(11) NOT NULL
+  `Version` int(11) NOT NULL,
+  `TimeStamp` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------

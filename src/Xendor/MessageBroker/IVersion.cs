@@ -6,5 +6,7 @@ namespace Xendor.MessageBroker
     {
         Guid AggregateId { get; }
         int Number { get; }
+
+        long TimeStamp { get; }
     }
 }
