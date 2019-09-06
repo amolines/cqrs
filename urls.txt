@@ -83,3 +83,5 @@ YOW! Nights March 2016 Martin Fowler - Event Sourcing: https://www.youtube.com/w
 DDD and Event Sourcing using ASP.NET Core, MediatR, SignalR and Angular.: https://www.youtube.com/watch?v=Bb4zwjzeA2M
 
 https://en.wikipedia.org/wiki/Event_storming
+https://abdullin.com/post/event-sourcing-why/
+https://abdullin.com/post/event-sourcing-projections/
