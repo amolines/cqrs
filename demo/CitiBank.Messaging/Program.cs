@@ -7,16 +7,18 @@ using Xendor.EventBus.RabbitMQ;
 using Xendor.MessageBroker;
 using Xendor.MessageBroker.MySql;
 using Xendor.MessageModel.MessageBroker;
-
 namespace CitiBank.Messaging
 {
     class Program
     {
         static void  Main(string[] args)
         {
+            var environmentName = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{environmentName}.json", true, true)
                 .AddEnvironmentVariables();
             var configuration = builder.Build();
             var connectionStringSection = configuration.GetSection("connectionString");

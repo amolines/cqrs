@@ -9,10 +9,10 @@
     <DockerServiceName>citibank.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="docker-compose.override.yml">
-      <DependentUpon>docker-compose.yml</DependentUpon>
-    </None>
+    <None Include="db-init-eventstore\init.sql" />
+    <None Include="db-init-view\init.sql" />
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="rabbitmq_init\definitions.json" />
   </ItemGroup>
 </Project>

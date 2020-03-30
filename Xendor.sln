@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xendor", "src\Xendor\Xendor.csproj", "{72EF2C55-235E-4FC7-9F50-32F4B6B5CB31}"
 EndProject
@@ -45,13 +45,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CQRS-ES.png = CQRS-ES.png
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
+		demo\CitiBank.View\Startup.cs = demo\CitiBank.View\Startup.cs
 		urls.txt = urls.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "demo", "demo", "{3BFA66BC-71A6-4130-91AA-F2978001E893}"
-	ProjectSection(SolutionItems) = preProject
-		demo\README.md = demo\README.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommandModel", "CommandModel", "{BBCCF481-8C30-43A3-9581-A50D06D38C4F}"
 EndProject
@@ -71,15 +69,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiBank.Messaging", "demo\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiBank.View", "demo\CitiBank.View\CitiBank.View.csproj", "{EABAA829-E4F6-441F-B450-809028783187}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{400A36A8-22D2-412E-B128-8D2D85FCD2D1}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mysql", "mysql", "{9B22D402-A475-44EA-92AE-ED6A6364AC7D}"
-	ProjectSection(SolutionItems) = preProject
-		demo\scripts\MySql\eventstore.sql = demo\scripts\MySql\eventstore.sql
-		demo\scripts\MySql\view.sql = demo\scripts\MySql\view.sql
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xendor.MessageBroker.MySql", "src\Xendor.MessageBroker.MySql\Xendor.MessageBroker.MySql.csproj", "{1313514D-37A7-4413-A9B9-DB70A1E9B59B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xendor.MessageBroker.MySql", "src\Xendor.MessageBroker.MySql\Xendor.MessageBroker.MySql.csproj", "{1313514D-37A7-4413-A9B9-DB70A1E9B59B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -192,8 +182,6 @@ Global
 		{DD03B779-FD86-498B-984D-753C5894DD17} = {BBCCF481-8C30-43A3-9581-A50D06D38C4F}
 		{B8B311DE-ECD0-46BC-A41E-A4A1CBC6582F} = {AA6C32F6-42FB-431B-B904-736D4C5C806C}
 		{EABAA829-E4F6-441F-B450-809028783187} = {C605BEC8-94FE-4CC7-AAD8-A11C15B3999E}
-		{400A36A8-22D2-412E-B128-8D2D85FCD2D1} = {3BFA66BC-71A6-4130-91AA-F2978001E893}
-		{9B22D402-A475-44EA-92AE-ED6A6364AC7D} = {400A36A8-22D2-412E-B128-8D2D85FCD2D1}
 		{1313514D-37A7-4413-A9B9-DB70A1E9B59B} = {B5AC1041-1AA3-406F-A562-42F56BEAE812}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

@@ -12,7 +12,7 @@ File Encoding         : 65001
 
 Date: 2019-09-03 11:49:43
 */
-
+USE eventstore;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

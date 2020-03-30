@@ -11,6 +11,7 @@ services:
      hostname: eventbus
      volumes:
        - volume_eventbus:/var/lib/rabbitmq
+       - ./rabbitmq_init/definitions.json:/etc/rabbitmq/definitions.json
      ports:
        - "7000:15672"
        - "7001:5672"
@@ -26,6 +27,7 @@ services:
        - "3360:3306"
      volumes:
        - volume_eventstore:/var/lib/mysql
+       - ./db-init-eventstore:/docker-entrypoint-initdb.d/
      restart: always
   view:
      image: mysql:5.7.17
@@ -39,6 +41,7 @@ services:
        - "3366:3306"
      volumes:
        - volume_view:/var/lib/mysql
+       - ./db-init-view:/docker-entrypoint-initdb.d/
      restart: always
   citibank.api:
     container_name: citibank.api
@@ -49,12 +52,16 @@ services:
     ports:
        - "57886:80"
        - "44330:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Demo
     build:
       context: .
       dockerfile: demo/CitiBank.Api/Dockerfile
   messaging:
     container_name: citibank.messaging
     image: ${DOCKER_REGISTRY}citibankmessaging
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Demo
     depends_on:
        - eventbus
        - view
@@ -69,13 +76,18 @@ services:
     ports:
       - "57887:80"
       - "44331:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Demo
     build:
       context: .
       dockerfile: demo/CitiBank.View/Dockerfile
 volumes:
     volume_view:
+       name: demo-view
        external: false
     volume_eventstore:
+       name: demo-eventstore
        external: false
     volume_eventbus:
+       name: demo-eventbus
        external: false

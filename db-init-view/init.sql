@@ -12,7 +12,7 @@ File Encoding         : 65001
 
 Date: 2019-09-05 08:26:08
 */
-
+USE view;
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

@@ -1,3 +1,5 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
 WORKDIR /app
 EXPOSE 80
@@ -14,16 +16,15 @@ COPY ["demo/CitiBank.Domain/CitiBank.Domain.csproj", "demo/CitiBank.Domain/"]
 COPY ["src/Xendor.CommandModel/Xendor.CommandModel.csproj", "src/Xendor.CommandModel/"]
 COPY ["src/Xendor.CommandModel.MySql/Xendor.CommandModel.MySql.csproj", "src/Xendor.CommandModel.MySql/"]
 COPY ["src/Xendor.Data.MySql/Xendor.Data.MySql.csproj", "src/Xendor.Data.MySql/"]
-COPY ["src/Xendor.EventBus.MySql/Xendor.EventBus.MySql.csproj", "src/Xendor.EventBus.MySql/"]
 RUN dotnet restore "demo/CitiBank.Api/CitiBank.Api.csproj"
 COPY . .
 WORKDIR "/src/demo/CitiBank.Api"
-RUN dotnet build "CitiBank.Api.csproj" -c Release -o /app
+RUN dotnet build "CitiBank.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "CitiBank.Api.csproj" -c Release -o /app
+RUN dotnet publish "CitiBank.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "CitiBank.Api.dll"]
