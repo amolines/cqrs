@@ -4,7 +4,7 @@ using Xendor.QueryModel.Criteria;
 namespace Xendor.QueryModel.Tests.Code
 {
 
-    public class UserFilter 
+    public class UserFilter : IMetaDataExpression
     {
         [Field("id", false)]
         public int Id { get; set; }

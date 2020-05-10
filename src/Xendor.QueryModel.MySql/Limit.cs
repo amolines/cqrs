@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Xendor.QueryModel.Expressions;
+using Xendor.QueryModel.Criteria.Paginate;
+using Xendor.QueryModel.Criteria.Slice;
 
 namespace Xendor.QueryModel.MySql
 {
@@ -7,12 +8,12 @@ namespace Xendor.QueryModel.MySql
     {
         private readonly int _startRecord;
         private readonly int? _maxRecords;
-        public Limit(Paginate paginate)
+        public Limit(IPaginateExpression paginate)
         {
             _startRecord = (paginate.Page - 1) * paginate.Limit;
             _maxRecords = paginate.Limit;
         }
-        public Limit(Slice slice)
+        public Limit(ISliceExpression slice)
         {
             _startRecord = slice.Start - 1;
             _maxRecords = slice.End;

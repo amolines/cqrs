@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Xendor.QueryModel.Expressions.Converts.Exceptions
+namespace Xendor.QueryModel.Criteria.Converts.Exceptions
 {
     public class FilterConvertException : Exception
     {

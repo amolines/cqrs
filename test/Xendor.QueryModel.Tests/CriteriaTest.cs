@@ -1,5 +1,9 @@
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.Extensions.Primitives;
+using Xendor.QueryModel.Criteria.OrderBy;
 using Xendor.QueryModel.Tests.Code;
 using Xunit;
 
@@ -11,7 +15,11 @@ namespace Xendor.QueryModel.Tests
         public void Criteria_With_Filters_In()
         {
             //Arrange
-            var criteria = new Criteria<UserFilter>("/api/users", "id=1&id=2&id=4");
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"id",new StringValues(new string[]{"1","2","4"})}
+            });
+            var criteria = new Criteria<UserFilter>("/api/users", query);
 
             //Act
             var value = criteria.ToString();
@@ -27,7 +35,11 @@ namespace Xendor.QueryModel.Tests
         public void Criteria_With_FullTextSearch()
         {
             //Arrange
-            var criteria = new Criteria<UserFilter>("/api/users","q=alejandro");
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"_q",new StringValues( "alejandro")}
+            });
+            var criteria = new Criteria<UserFilter>("/api/users", query);
 
             //Act
             var value = criteria.ToString();
@@ -44,7 +56,13 @@ namespace Xendor.QueryModel.Tests
         public void Criteria_With_Filters()
         {
             //Arrange
-            var criteria = new Criteria<UserFilter>("/api/users", "name=alejandro&lastName=molines&address.cp=08204");
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"name",new StringValues( "alejandro")},
+                {"lastName",new StringValues( "molines")},
+                {"address.cp",new StringValues( "08204")}
+            });
+            var criteria = new Criteria<UserFilter>("/api/users", query);
 
             //Act
             var value = criteria.ToString();
@@ -60,10 +78,13 @@ namespace Xendor.QueryModel.Tests
         public void Criteria_With_Paginate()
         {
             //Arrange
-
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"_page",new StringValues( "7")}
+            });
 
             //Act
-            var criteria = new Criteria<UserFilter>("/api/users", "_page=7");
+            var criteria = new Criteria<UserFilter>("/api/users", query);
 
 
             //Assert
@@ -75,10 +96,14 @@ namespace Xendor.QueryModel.Tests
         public void Criteria_With_Paginate_Limit()
         {
             //Arrange
-
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"_page",new StringValues( "7")},
+                {"_limit",new StringValues( "20")}
+            });
 
             //Act
-            var criteria = new Criteria<UserFilter>("/api/users", "_page=7&_limit=20");
+            var criteria = new Criteria<UserFilter>("/api/users", query);
 
 
             //Assert
@@ -86,29 +111,21 @@ namespace Xendor.QueryModel.Tests
             criteria.Paginate.Page.Should().Be(7);
 
         }
-        [Fact]
-        public void Criteria_Sort_IsNull()
-        {
-            //Arrange
-
-
-            //Act
-            var criteria = new Criteria<UserFilter>("/api/users", "_sort=user,views&_order=desc,asc");
-
-
-            //Assert
-            criteria.Sort.Should().BeNull();
- 
-        }
+    
+      
 
         [Fact]
         public void Criteria_With_Sort()
         {
             //Arrange
-
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"_sort",new StringValues( "name,lastName")},
+                {"_order",new StringValues( "desc,asc")}
+            });
 
             //Act
-            var criteria = new Criteria<UserFilter>("/api/users", "_sort=name,lastName&_order=desc,asc");
+            var criteria = new Criteria<UserFilter>("/api/users", query);
 
 
             //Assert
@@ -119,24 +136,32 @@ namespace Xendor.QueryModel.Tests
         public void Criteria_With_Sort_Null()
         {
             //Arrange
-
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"_sort",new StringValues( "namer,lastName")},
+                {"_order",new StringValues( "desc,asc")}
+            });
 
             //Act
-            var criteria = new Criteria<UserFilter>("/api/users", "_sort=namer,lastName&_order=desc,asc");
+            var criteria = new Criteria<UserFilter>("/api/users", query);
 
 
             //Assert
-            criteria.Sort.Should().Be(null);
+            criteria.Sort.Should().BeOfType<OrderByEmptyExpression<UserFilter>>();
 
         }
         [Fact]
         public void Criteria_With_Slice_End()
         {
             //Arrange
-
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"_start",new StringValues( "20")},
+                {"_end",new StringValues( "30")}
+            });
 
             //Act
-            var criteria = new Criteria<UserFilter>("/api/users", "_start=20&_end=30");
+            var criteria = new Criteria<UserFilter>("/api/users", query);
 
 
             //Assert
@@ -147,10 +172,13 @@ namespace Xendor.QueryModel.Tests
         public void Criteria_With_Slice()
         {
             //Arrange
-
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"_start",new StringValues( "20")}
+            });
 
             //Act
-            var criteria = new Criteria<UserFilter>("/api/users", "_start=20");
+            var criteria = new Criteria<UserFilter>("/api/users", query);
 
 
             //Assert

@@ -1,7 +1,8 @@
 ﻿using System;
-using Xendor.QueryModel.Expressions.Converts.Exceptions;
+using Xendor.QueryModel.Criteria.Converts.Exceptions;
 
-namespace Xendor.QueryModel.Expressions.Converts
+
+namespace Xendor.QueryModel.Criteria.Converts
 {
     internal class GuidFilterConvert : FilterConvert<Guid>
     {

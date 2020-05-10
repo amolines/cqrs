@@ -75,7 +75,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Assert
-            slice.Should().BeOfType<EmptySliceExpression>();
+            slice.Should().BeOfType<SliceEmptyExpression>();
 
 
         }

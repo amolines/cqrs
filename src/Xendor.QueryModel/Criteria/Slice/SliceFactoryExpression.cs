@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Xendor.QueryModel.Criteria.Slice
 {
-    internal class SliceFactoryExpression : FactoryExpression<NullMetaDataExpression,ISliceExpression,EmptySliceExpression>
+    internal class SliceFactoryExpression : FactoryExpression<NullMetaDataExpression,ISliceExpression,SliceEmptyExpression>
 
     {
         public SliceFactoryExpression(IQueryCollection queryCollection) 

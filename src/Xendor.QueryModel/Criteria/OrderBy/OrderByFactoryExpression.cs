@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Xendor.QueryModel.Criteria.OrderBy
 {
-    internal class OrderByFactoryExpression<TMetaData> : FactoryExpression<TMetaData, IOrderByExpression<TMetaData>, OrderByEmptyExpression<TMetaData>>
+    internal class OrderByFactoryExpression<TMetaData> : FactoryExpression<TMetaData, IOrderByExpression, OrderByEmptyExpression<TMetaData>>
         where TMetaData : IMetaDataExpression
 
 
@@ -37,7 +37,7 @@ namespace Xendor.QueryModel.Criteria.OrderBy
             return isValid;
         }
 
-        protected override IOrderByExpression<TMetaData> Extract()
+        protected override IOrderByExpression Extract()
         {
             var fields = new List<Field>();
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Xendor.QueryModel.Criteria.FullTextSearch;
 using Xendor.QueryModel.Expressions;
 
 namespace Xendor.QueryModel.MySql
@@ -8,7 +9,7 @@ namespace Xendor.QueryModel.MySql
     {
         private readonly string _match;
         private readonly string _value;
-        public Match(FullTextSearch fullTextSearch)
+        public Match(IFullTextSearchExpression fullTextSearch)
         {
 
             var values = fullTextSearch.Name.Select(v=> $"`{v}`");

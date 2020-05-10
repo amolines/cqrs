@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xendor.QueryModel.Criteria;
 
 namespace Xendor.QueryModel
 {
@@ -17,7 +18,7 @@ namespace Xendor.QueryModel
         
 
         public Task<IQueryResult> Submit<TIn>(Criteria<TIn> criteria) 
-            where TIn : class
+            where TIn : IMetaDataExpression
         {
             var handler = _queryHandlerFactory.CreateQueryHandler<TIn>();
             var result = handler.Handle(criteria);

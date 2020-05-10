@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Xendor.QueryModel.Expressions.Converts.Exceptions;
+using Xendor.QueryModel.Criteria.Converts.Exceptions;
 
-namespace Xendor.QueryModel.Expressions.Converts
+namespace Xendor.QueryModel.Criteria.Converts
 {
     internal class DateTimeFilterConvert : FilterConvert<DateTime>
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xendor.QueryModel.Attributes;
+using Xendor.QueryModel.Criteria.Paginate;
 using Xendor.QueryModel.Expressions;
 
 namespace Xendor.QueryModel
@@ -10,10 +11,10 @@ namespace Xendor.QueryModel
     {
         private readonly ICriteria _criteria;
         private string _expression;
-        private  Paginate _first;
-        private  Paginate _prev;
-        private  Paginate _next;
-        private  Paginate _last;
+        private PaginateExpression _first;
+        private PaginateExpression _prev;
+        private PaginateExpression _next;
+        private PaginateExpression _last;
 
         public PaginateQueryHeader(ICriteria criteria, long total)
         {
@@ -35,16 +36,16 @@ namespace Xendor.QueryModel
 
             var totalPage = (int)Math.Ceiling((double)Total / _criteria.Paginate.Limit);
 
-            _first = new Paginate(1, _criteria.Paginate.Limit);
-            _last = new Paginate(totalPage, _criteria.Paginate.Limit);
+            _first = new PaginateExpression(1, _criteria.Paginate.Limit);
+            _last = new PaginateExpression(totalPage, _criteria.Paginate.Limit);
             if (_criteria.Paginate.Page > 1)
             {
-                _prev = new Paginate(_criteria.Paginate.Page - 1, _criteria.Paginate.Limit);
+                _prev = new PaginateExpression(_criteria.Paginate.Page - 1, _criteria.Paginate.Limit);
             }
 
             if (_criteria.Paginate.Page >= totalPage) return;
-            _next = new Paginate(_criteria.Paginate.Page + 1, _criteria.Paginate.Limit);
-           
+            _next = new PaginateExpression(_criteria.Paginate.Page + 1, _criteria.Paginate.Limit);
+
         }
         [HeaderName("first")]
         public string First => $"{_criteria.Path}?{_expression}&{_first}";

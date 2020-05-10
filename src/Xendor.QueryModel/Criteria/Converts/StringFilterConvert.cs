@@ -1,4 +1,4 @@
-﻿namespace Xendor.QueryModel.Expressions.Converts
+﻿namespace Xendor.QueryModel.Criteria.Converts
 {
     internal class StringFilterConvert : FilterConvert<string>
     {

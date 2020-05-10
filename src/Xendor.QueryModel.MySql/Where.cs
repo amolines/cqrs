@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Xendor.QueryModel.Criteria.Converts;
+using Xendor.QueryModel.Criteria.FilterCollection;
 using Xendor.QueryModel.Expressions;
-using Xendor.QueryModel.Expressions.Converts;
+
 namespace Xendor.QueryModel.MySql
 {
     internal class Where
@@ -12,7 +14,7 @@ namespace Xendor.QueryModel.MySql
         public Where(IEnumerable<Filter> filters)
         {
             _parameters = new Dictionary<string, object>();
-            var _convert = new Convert();
+            var convert = new Convert();
 
             var @where = new List<string>();
             var count = 1;
@@ -23,7 +25,7 @@ namespace Xendor.QueryModel.MySql
                     var parameterIn = new List<string>();
                     foreach (var f in filter)
                     {
-                        var value = _convert.Parse(f.Type, f.Value);
+                        var value = convert.Parse(f.Type, f.Value);
                         _parameters.Add($"@p{count}", value);
                         parameterIn.Add($"@p{count}");
                         count++;
@@ -33,7 +35,7 @@ namespace Xendor.QueryModel.MySql
                 else
                 {
                     @where.Add($"`{filter.Key}` = @p{count}");
-                    var value = _convert.Parse(filter.First().Type, filter.First().Value);
+                    var value = convert.Parse(filter.First().Type, filter.First().Value);
                     _parameters.Add($"@p{count}", value);
                     count++;
                 }

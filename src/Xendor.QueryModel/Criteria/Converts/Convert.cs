@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Xendor.QueryModel.Expressions.Converts.Factories;
+using Xendor.QueryModel.Criteria.Converts.Factories;
 
-namespace Xendor.QueryModel.Expressions.Converts
+
+namespace Xendor.QueryModel.Criteria.Converts
 {
     public class Convert : IConvert
     {

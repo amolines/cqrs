@@ -12,8 +12,4 @@
     <ProjectReference Include="..\Xendor\Xendor.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Criteria\Extensions\" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Xendor.QueryModel.Expressions.Converts.Factories
+﻿namespace Xendor.QueryModel.Criteria.Converts.Factories
 {
     internal interface IFilterConvertFactory
     {

@@ -1,10 +1,10 @@
 using System;
 
-namespace Xendor.QueryModel.Expressions
+namespace Xendor.QueryModel.Criteria.FilterCollection
 {
     public class Filter
     {
-        public Filter(string name, string value, Type type)
+        public  Filter(string name, string value, Type type)
         {
             Name = name;
             Value = value;

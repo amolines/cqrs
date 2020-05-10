@@ -7,7 +7,7 @@ namespace Xendor.QueryModel.Criteria
 {
     public abstract class FactoryExpression<TMetaData, TCriteria, TCriteriaEmpty> : IFactoryExpression<TMetaData, TCriteria>
         where TMetaData : IMetaDataExpression
-        where TCriteria : IExpression<TMetaData>
+        where TCriteria : IExpression
         where TCriteriaEmpty : TCriteria, new()
     {
         public delegate bool TryParseHandler<T>(string value, out T result);
@@ -20,6 +20,7 @@ namespace Xendor.QueryModel.Criteria
             _metaDataCriteriaCache = MetaDataExpressionCache.Instance;
         }
 
+        protected IEnumerable<string> Keys => _queryCollection.Keys;
         protected bool ContainsKey(string key)
         {
             return _queryCollection.ContainsKey(key);

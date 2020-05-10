@@ -1,7 +1,6 @@
-﻿namespace Xendor.QueryModel.Criteria
+namespace Xendor.QueryModel.Criteria
 {
-    public class NullMetaDataExpression : IMetaDataExpression
+    internal class NullMetaDataExpression : IMetaDataExpression
     {
-
     }
 }

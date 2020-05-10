@@ -1,7 +1,10 @@
-﻿using Xendor.QueryModel.Expressions.Converts.Exceptions;
+﻿
 
-namespace Xendor.QueryModel.Expressions.Converts
+using Xendor.QueryModel.Criteria.Converts.Exceptions;
+
+namespace Xendor.QueryModel.Criteria.Converts
 {
+
     internal class DoubleFilterConvert : FilterConvert<double>
     {
         protected override double ToConvert(string value)

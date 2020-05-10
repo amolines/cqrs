@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Xendor.QueryModel.Expressions.Converts
+namespace Xendor.QueryModel.Criteria.Converts
 {
     public interface IConvert
     {

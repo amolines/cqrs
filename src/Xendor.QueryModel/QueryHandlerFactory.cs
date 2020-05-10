@@ -1,4 +1,5 @@
 ﻿using System;
+using Xendor.QueryModel.Criteria;
 using Xendor.QueryModel.Exceptions;
 using Xendor.ServiceLocator;
 
@@ -14,7 +15,7 @@ namespace Xendor.QueryModel
         }
 
         public IQueryHandler<TIn> CreateQueryHandler<TIn>() 
-            where TIn : class
+            where TIn : IMetaDataExpression
         {
             var handler = _serviceProvider.GetService<IQueryHandler<TIn>>();
             if (handler == null)

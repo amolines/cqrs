@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Xendor.QueryModel.Criteria.OrderBy
 {
-    public class OrderByExpression<TMetaData> : IOrderByExpression<TMetaData>
+    public class OrderByExpression<TMetaData> : IOrderByExpression
         where TMetaData : IMetaDataExpression
     {
         private readonly IList<Field> _fields;
@@ -13,7 +13,7 @@ namespace Xendor.QueryModel.Criteria.OrderBy
         {
             _fields = new List<Field>(fields);
         }
-        public static IOrderByExpression<TMetaData> Extract(IQueryCollection queryCollection)
+        public static IOrderByExpression Extract(IQueryCollection queryCollection)
         {
             var factory = new OrderByFactoryExpression<TMetaData>(queryCollection);
             return factory.Create(queryCollection);

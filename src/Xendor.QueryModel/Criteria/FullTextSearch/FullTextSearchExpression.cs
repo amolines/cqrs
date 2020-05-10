@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Xendor.QueryModel.Criteria.FullTextSearch
 {
-    public  class FullTextSearchExpression<TMetaData> : IFullTextSearchExpression<TMetaData>
+    public  class FullTextSearchExpression<TMetaData> : IFullTextSearchExpression
         where TMetaData : IMetaDataExpression
     {
         private readonly List<string> _names;
@@ -13,7 +13,7 @@ namespace Xendor.QueryModel.Criteria.FullTextSearch
             _names = names;
             Value = value;
         }
-        public static IFullTextSearchExpression<TMetaData> Extract(IQueryCollection queryCollection)
+        public static IFullTextSearchExpression Extract(IQueryCollection queryCollection)
         {
             var factory = new FullTextSearchFactoryExpression<TMetaData>(queryCollection);
             return factory.Create(queryCollection);

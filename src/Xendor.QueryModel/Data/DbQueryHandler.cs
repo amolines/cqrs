@@ -4,13 +4,14 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Xendor.Data;
+using Xendor.QueryModel.Criteria;
 using Xendor.QueryModel.Expressions;
 
 namespace Xendor.QueryModel.Data
 {
     public class DbQueryHandler<TIn, TOut, TQuery> : IQueryHandler<TIn>
         where TOut : IRootDto
-        where TIn : class
+        where TIn : IMetaDataExpression
         where TQuery :  ISelectQuery, new()
     {
         private readonly IUnitOfWorkManager _unitOfWorkManager;
