@@ -70,8 +70,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiBank.View", "demo\CitiB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Xendor.MessageBroker.MySql", "src\Xendor.MessageBroker.MySql\Xendor.MessageBroker.MySql.csproj", "{1313514D-37A7-4413-A9B9-DB70A1E9B59B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xendor.QueryModel.MySql.Tests", "test\Xendor.QueryModel.MySql.Tests\Xendor.QueryModel.MySql.Tests.csproj", "{E9262840-C0DB-4CD4-A9E5-B4B071E8DF08}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,10 +152,6 @@ Global
 		{1313514D-37A7-4413-A9B9-DB70A1E9B59B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1313514D-37A7-4413-A9B9-DB70A1E9B59B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1313514D-37A7-4413-A9B9-DB70A1E9B59B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9262840-C0DB-4CD4-A9E5-B4B071E8DF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9262840-C0DB-4CD4-A9E5-B4B071E8DF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9262840-C0DB-4CD4-A9E5-B4B071E8DF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9262840-C0DB-4CD4-A9E5-B4B071E8DF08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,7 +182,6 @@ Global
 		{B8B311DE-ECD0-46BC-A41E-A4A1CBC6582F} = {AA6C32F6-42FB-431B-B904-736D4C5C806C}
 		{EABAA829-E4F6-441F-B450-809028783187} = {C605BEC8-94FE-4CC7-AAD8-A11C15B3999E}
 		{1313514D-37A7-4413-A9B9-DB70A1E9B59B} = {B5AC1041-1AA3-406F-A562-42F56BEAE812}
-		{E9262840-C0DB-4CD4-A9E5-B4B071E8DF08} = {61EBBC6F-E955-4B92-8F4E-FB6B2CFFFD25}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1CFD3B8-6874-4F74-A437-CB11BF7EFDD0}
