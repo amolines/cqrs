@@ -25,7 +25,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var sort = OrderBy<UserMetaDataCriteria>.Extract(query);
+            var sort = OrderByExpression<UserMetaDataCriteria>.Extract(query);
             var text = sort.ToString();
 
 
@@ -50,7 +50,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var sort = OrderBy<UserMetaDataCriteria>.Extract(query);
+            var sort = OrderByExpression<UserMetaDataCriteria>.Extract(query);
             var text = sort.ToString();
 
 
@@ -74,13 +74,13 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var sort = OrderBy<UserMetaDataCriteria>.Extract(query);
+            var sort = OrderByExpression<UserMetaDataCriteria>.Extract(query);
 
 
 
 
             //Assert
-            sort.Should().BeOfType<OrderByEmpty<UserMetaDataCriteria>>();
+            sort.Should().BeOfType<OrderByEmptyExpression<UserMetaDataCriteria>>();
 
 
         }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace Xendor.QueryModel.Criteria
 {
-    public interface IMetaDataCriteriaCache
+    public interface IMetaDataExpressionCache
     {
         IDictionary<string, Type> GetFields<TMetaData>()
-            where TMetaData : IMetaDataCriteria;
+            where TMetaData : IMetaDataExpression;
 
         IDictionary<string, Type> GetFullTextSearchFields<TMetaData>()
-            where TMetaData : IMetaDataCriteria;
+            where TMetaData : IMetaDataExpression;
 
         IDictionary<string, Type> GetEmbedFields<TMetaData>()
-            where TMetaData : IMetaDataCriteria;
+            where TMetaData : IMetaDataExpression;
     }
 }

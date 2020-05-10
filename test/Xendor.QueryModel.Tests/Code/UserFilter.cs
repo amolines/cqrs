@@ -18,7 +18,7 @@ namespace Xendor.QueryModel.Tests.Code
         public Address Address { get; set; }
     }
 
-    public class UserMetaDataCriteria : IMetaDataCriteria
+    public class UserMetaDataCriteria : IMetaDataExpression
     {
         [Field("id", false)]
         public int Id { get; set; }

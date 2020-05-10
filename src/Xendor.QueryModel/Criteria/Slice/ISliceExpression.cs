@@ -1,6 +1,6 @@
 namespace Xendor.QueryModel.Criteria.Slice
 {
-    public interface ISlice : ICriteria<NullMetaDataCriteria>
+    public interface ISliceExpression : IExpression<NullMetaDataExpression>
     {
         int Start { get; }
         int? End { get; }

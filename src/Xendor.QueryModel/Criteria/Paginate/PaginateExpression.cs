@@ -2,17 +2,17 @@
 
 namespace Xendor.QueryModel.Criteria.Paginate
 {
-    public class Paginate: IPaginate
+    public class PaginateExpression: IPaginateExpression
     {
-        internal Paginate(int page, int limitByDefault = 10)
+        internal PaginateExpression(int page, int limitByDefault = 10)
         {
             Page = page;
             Limit = limitByDefault;
         }
 
-        public static IPaginate Extract(IQueryCollection queryCollection)
+        public static IPaginateExpression Extract(IQueryCollection queryCollection)
         {
-            var factory = new PaginateFactory(queryCollection);
+            var factory = new PaginateFactoryExpression(queryCollection);
             return factory.Create(queryCollection);
         }
         public int Page { get; }

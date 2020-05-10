@@ -5,17 +5,17 @@ using Microsoft.AspNetCore.Http;
 
 namespace Xendor.QueryModel.Criteria.OrderBy
 {
-    public class OrderBy<TMetaData> : IOrderBy<TMetaData>
-        where TMetaData : IMetaDataCriteria
+    public class OrderByExpression<TMetaData> : IOrderByExpression<TMetaData>
+        where TMetaData : IMetaDataExpression
     {
         private readonly IList<Field> _fields;
-        internal OrderBy(IEnumerable<Field> fields)
+        internal OrderByExpression(IEnumerable<Field> fields)
         {
             _fields = new List<Field>(fields);
         }
-        public static IOrderBy<TMetaData> Extract(IQueryCollection queryCollection)
+        public static IOrderByExpression<TMetaData> Extract(IQueryCollection queryCollection)
         {
-            var factory = new OrderByFactory<TMetaData>(queryCollection);
+            var factory = new OrderByFactoryExpression<TMetaData>(queryCollection);
             return factory.Create(queryCollection);
         }
         public IEnumerable<Field> Fields => new ReadOnlyCollection<Field>(_fields);

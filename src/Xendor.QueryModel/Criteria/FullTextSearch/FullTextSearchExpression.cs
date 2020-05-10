@@ -4,18 +4,18 @@ using Microsoft.AspNetCore.Http;
 
 namespace Xendor.QueryModel.Criteria.FullTextSearch
 {
-    public  class FullTextSearch<TMetaData> : IFullTextSearch<TMetaData>
-        where TMetaData : IMetaDataCriteria
+    public  class FullTextSearchExpression<TMetaData> : IFullTextSearchExpression<TMetaData>
+        where TMetaData : IMetaDataExpression
     {
         private readonly List<string> _names;
-        internal FullTextSearch(List<string> names, string value)
+        internal FullTextSearchExpression(List<string> names, string value)
         {
             _names = names;
             Value = value;
         }
-        public static IFullTextSearch<TMetaData> Extract(IQueryCollection queryCollection)
+        public static IFullTextSearchExpression<TMetaData> Extract(IQueryCollection queryCollection)
         {
-            var factory = new FullTextSearchFactory<TMetaData>(queryCollection);
+            var factory = new FullTextSearchFactoryExpression<TMetaData>(queryCollection);
             return factory.Create(queryCollection);
         }
         public IEnumerable<string> Name => new ReadOnlyCollection<string>(_names);

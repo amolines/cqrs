@@ -1,6 +1,6 @@
 ﻿namespace Xendor.QueryModel.Criteria
 {
-    public interface IMetaDataCriteria
+    public interface IMetaDataExpression
     {
 
     }

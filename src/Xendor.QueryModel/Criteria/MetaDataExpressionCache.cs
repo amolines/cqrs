@@ -5,17 +5,17 @@ using Xendor.QueryModel.Attributes;
 
 namespace Xendor.QueryModel.Criteria
 {
-    public sealed class MetaDataCriteriaCache : IMetaDataCriteriaCache
+    public sealed class MetaDataExpressionCache : IMetaDataExpressionCache
     {
         private readonly IDictionary<Type, IDictionary<string, Type>> _fields;
         private readonly IDictionary<Type, IDictionary<string, Type>> _fullTextSearchFields;
         private readonly IDictionary<Type, IDictionary<string, Type>> _embedFields;
-        private static readonly Lazy<MetaDataCriteriaCache>
+        private static readonly Lazy<MetaDataExpressionCache>
             Lazy =
-                new Lazy<MetaDataCriteriaCache>
-                    (() => new MetaDataCriteriaCache());
+                new Lazy<MetaDataExpressionCache>
+                    (() => new MetaDataExpressionCache());
 
-        private MetaDataCriteriaCache()
+        private MetaDataExpressionCache()
         {
             _fields = new ConcurrentDictionary<Type, IDictionary<string, Type>>();
             _fullTextSearchFields = new ConcurrentDictionary<Type, IDictionary<string, Type>>();
@@ -23,10 +23,10 @@ namespace Xendor.QueryModel.Criteria
         }
 
 
-        public static MetaDataCriteriaCache Instance => Lazy.Value;
+        public static MetaDataExpressionCache Instance => Lazy.Value;
 
         public IDictionary<string, Type> GetFields<TMetaData>()
-            where TMetaData : IMetaDataCriteria
+            where TMetaData : IMetaDataExpression
         {
             if (_fields.ContainsKey(typeof(TMetaData))) return _fields[typeof(TMetaData)];
             var fields = FieldAttribute.GetFields<TMetaData>();
@@ -36,7 +36,7 @@ namespace Xendor.QueryModel.Criteria
         }
 
         public IDictionary<string, Type> GetFullTextSearchFields<TMetaData>()
-            where TMetaData : IMetaDataCriteria
+            where TMetaData : IMetaDataExpression
         {
             if (_fullTextSearchFields.ContainsKey(typeof(TMetaData))) return _fullTextSearchFields[typeof(TMetaData)];
             var fields = FieldAttribute.GetFields<TMetaData>(true);
@@ -45,7 +45,7 @@ namespace Xendor.QueryModel.Criteria
         }
 
         public IDictionary<string, Type> GetEmbedFields<TMetaData>()
-            where TMetaData : IMetaDataCriteria
+            where TMetaData : IMetaDataExpression
         {
             if (_embedFields.ContainsKey(typeof(TMetaData))) return _embedFields[typeof(TMetaData)];
             var fields = EmbedFieldAttribute.GetFields<TMetaData>();

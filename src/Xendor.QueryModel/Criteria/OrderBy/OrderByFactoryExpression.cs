@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace Xendor.QueryModel.Criteria.OrderBy
 {
-    internal class OrderByFactory<TMetaData> : FactoryCriteria<TMetaData, IOrderBy<TMetaData>, OrderByEmpty<TMetaData>>
-        where TMetaData : IMetaDataCriteria
+    internal class OrderByFactoryExpression<TMetaData> : FactoryExpression<TMetaData, IOrderByExpression<TMetaData>, OrderByEmptyExpression<TMetaData>>
+        where TMetaData : IMetaDataExpression
 
 
     {
-        public OrderByFactory(IQueryCollection queryCollection)
+        public OrderByFactoryExpression(IQueryCollection queryCollection)
             : base(queryCollection)
         {
         }
@@ -37,7 +37,7 @@ namespace Xendor.QueryModel.Criteria.OrderBy
             return isValid;
         }
 
-        protected override IOrderBy<TMetaData> Extract()
+        protected override IOrderByExpression<TMetaData> Extract()
         {
             var fields = new List<Field>();
 
@@ -55,7 +55,7 @@ namespace Xendor.QueryModel.Criteria.OrderBy
                 index++;
                 fields.Add(field);
             }
-            return new OrderBy<TMetaData>(fields);
+            return new OrderByExpression<TMetaData>(fields);
         }
     }
 }

@@ -5,19 +5,19 @@ using Microsoft.AspNetCore.Http;
 
 namespace Xendor.QueryModel.Criteria
 {
-    public abstract class FactoryCriteria<TMetaData, TCriteria, TCriteriaEmpty> : IFactoryCriteria<TMetaData, TCriteria>
-        where TMetaData : IMetaDataCriteria
-        where TCriteria : ICriteria<TMetaData>
+    public abstract class FactoryExpression<TMetaData, TCriteria, TCriteriaEmpty> : IFactoryExpression<TMetaData, TCriteria>
+        where TMetaData : IMetaDataExpression
+        where TCriteria : IExpression<TMetaData>
         where TCriteriaEmpty : TCriteria, new()
     {
         public delegate bool TryParseHandler<T>(string value, out T result);
         public delegate T ParseHandler<T>(string value);
         private readonly IQueryCollection _queryCollection;
-        private readonly IMetaDataCriteriaCache _metaDataCriteriaCache;
-        protected FactoryCriteria(IQueryCollection queryCollection)
+        private readonly IMetaDataExpressionCache _metaDataCriteriaCache;
+        protected FactoryExpression(IQueryCollection queryCollection)
         {
             _queryCollection = queryCollection;
-            _metaDataCriteriaCache = MetaDataCriteriaCache.Instance;
+            _metaDataCriteriaCache = MetaDataExpressionCache.Instance;
         }
 
         protected bool ContainsKey(string key)
@@ -87,7 +87,7 @@ namespace Xendor.QueryModel.Criteria
 
             return values.Select(v => handler(v)).ToArray();
         }
-        protected IMetaDataCriteriaCache Cache => _metaDataCriteriaCache;
+        protected IMetaDataExpressionCache Cache => _metaDataCriteriaCache;
         public TCriteria Create(IQueryCollection queryCollection)
         {
             if (!Contains() || !Validate()) return new TCriteriaEmpty();

@@ -22,11 +22,11 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var paginate = Paginate.Extract(query);
+            var paginate = PaginateExpression.Extract(query);
 
 
             //Assert
-            paginate.Should().BeOfType<PaginateEmpty>();
+            paginate.Should().BeOfType<PaginateEmptyExpression>();
 
 
         }
@@ -43,7 +43,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var paginate = Paginate.Extract(query);
+            var paginate = PaginateExpression.Extract(query);
             var text = paginate.ToString();
 
             //Assert
@@ -64,7 +64,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var paginate = Paginate.Extract(query);
+            var paginate = PaginateExpression.Extract(query);
             var text = paginate.ToString();
 
             //Assert

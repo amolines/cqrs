@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace Xendor.QueryModel.Criteria.FullTextSearch
 {
-    internal class FullTextSearchFactory<TMetaData> : FactoryCriteria<TMetaData, IFullTextSearch<TMetaData>, FullTextSearchEmpty<TMetaData>>
-        where TMetaData : IMetaDataCriteria
+    internal class FullTextSearchFactoryExpression<TMetaData> : FactoryExpression<TMetaData, IFullTextSearchExpression<TMetaData>, FullTextSearchEmptyExpression<TMetaData>>
+        where TMetaData : IMetaDataExpression
     {
-        public FullTextSearchFactory(IQueryCollection queryCollection)
+        public FullTextSearchFactoryExpression(IQueryCollection queryCollection)
             : base(queryCollection)
         {
         }
@@ -22,10 +22,10 @@ namespace Xendor.QueryModel.Criteria.FullTextSearch
             return fullTextSearch.Length.Equals(1);
         }
 
-        protected override IFullTextSearch<TMetaData> Extract()
+        protected override IFullTextSearchExpression<TMetaData> Extract()
         {
             var value = GetValue(FullTextSearchReservedWords.KeyQ)[0];
-            return new FullTextSearch<TMetaData>(Cache.GetFullTextSearchFields<TMetaData>().Keys.ToList(), value);
+            return new FullTextSearchExpression<TMetaData>(Cache.GetFullTextSearchFields<TMetaData>().Keys.ToList(), value);
         }
     }
 }

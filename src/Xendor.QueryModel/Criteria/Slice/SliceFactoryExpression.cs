@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace Xendor.QueryModel.Criteria.Slice
 {
-    internal class SliceFactory : FactoryCriteria<NullMetaDataCriteria,ISlice,SliceEmpty>
+    internal class SliceFactoryExpression : FactoryExpression<NullMetaDataExpression,ISliceExpression,EmptySliceExpression>
 
     {
-        public SliceFactory(IQueryCollection queryCollection) 
+        public SliceFactoryExpression(IQueryCollection queryCollection) 
             : base(queryCollection)
         {
         }
@@ -34,12 +34,12 @@ namespace Xendor.QueryModel.Criteria.Slice
             return false;
         }
 
-        protected override ISlice Extract()
+        protected override ISliceExpression Extract()
         {
             var start = ParseValue(SliceReservedWords.KeyStart, int.Parse);
-            if (!ContainsKey(SliceReservedWords.KeyEnd)) return new Slice(start);
+            if (!ContainsKey(SliceReservedWords.KeyEnd)) return new SliceExpression(start);
             var end = ParseValue(SliceReservedWords.KeyEnd, int.Parse);
-            return new Slice(start, end);
+            return new SliceExpression(start, end);
 
         }
     }

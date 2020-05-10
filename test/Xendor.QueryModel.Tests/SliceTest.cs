@@ -23,7 +23,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var slice = Slice.Extract(query);
+            var slice = SliceExpression.Extract(query);
             var text = slice.ToString();
 
 
@@ -46,7 +46,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var slice = Slice.Extract(query);
+            var slice = SliceExpression.Extract(query);
             var text = slice.ToString();
 
 
@@ -69,13 +69,13 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var slice = Slice.Extract(query);
+            var slice = SliceExpression.Extract(query);
 
 
 
 
             //Assert
-            slice.Should().BeOfType<SliceEmpty>();
+            slice.Should().BeOfType<EmptySliceExpression>();
 
 
         }

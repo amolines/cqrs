@@ -2,16 +2,16 @@ using Microsoft.AspNetCore.Http;
 
 namespace Xendor.QueryModel.Criteria.Slice
 {
-    public class Slice :  ISlice
+    public class SliceExpression :  ISliceExpression
     {
-        internal Slice(int start, int? end = null)
+        internal SliceExpression(int start, int? end = null)
         {
             Start = start;
             End = end;
         }
-        public static ISlice Extract(IQueryCollection queryCollection)
+        public static ISliceExpression Extract(IQueryCollection queryCollection)
         {
-            var factory = new SliceFactory(queryCollection);
+            var factory = new SliceFactoryExpression(queryCollection);
             return factory.Create(queryCollection);
         }
 

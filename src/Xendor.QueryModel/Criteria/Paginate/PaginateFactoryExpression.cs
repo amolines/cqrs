@@ -2,10 +2,10 @@
 
 namespace Xendor.QueryModel.Criteria.Paginate
 {
-    internal class PaginateFactory : FactoryCriteria<NullMetaDataCriteria, IPaginate, PaginateEmpty>
+    internal class PaginateFactoryExpression : FactoryExpression<NullMetaDataExpression, IPaginateExpression, PaginateEmptyExpression>
 
     {
-        public PaginateFactory(IQueryCollection queryCollection)
+        public PaginateFactoryExpression(IQueryCollection queryCollection)
             : base(queryCollection)
         {
         }
@@ -33,12 +33,12 @@ namespace Xendor.QueryModel.Criteria.Paginate
             return false;
         }
 
-        protected override IPaginate Extract()
+        protected override IPaginateExpression Extract()
         {
             var page = ParseValue(PaginateReservedWords.KeyPage, int.Parse);
-            if (!ContainsKey(PaginateReservedWords.KeyLimit)) return new Paginate(page);
+            if (!ContainsKey(PaginateReservedWords.KeyLimit)) return new PaginateExpression(page);
             var limit = ParseValue(PaginateReservedWords.KeyLimit, int.Parse);
-            return new Paginate(page, limit);
+            return new PaginateExpression(page, limit);
         }
     }
 }

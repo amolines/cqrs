@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 namespace Xendor.QueryModel.Criteria.OrderBy
 {
-    public interface IOrderBy<TMetaData> : ICriteria<TMetaData>
-        where TMetaData : IMetaDataCriteria
+    public interface IOrderByExpression<TMetaData> : IExpression<TMetaData>
+        where TMetaData : IMetaDataExpression
     {
         IEnumerable<Field> Fields { get; }
     }
