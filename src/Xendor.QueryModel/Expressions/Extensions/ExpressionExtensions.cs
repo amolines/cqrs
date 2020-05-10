@@ -74,8 +74,12 @@ namespace Xendor.QueryModel.Expressions.Extensions
                 {
                     paginate = new Paginate(pageValue);
                 }
-                var limitValue = Convert.ToInt32(limitParameter.Split('=')[1]);
-                paginate = new Paginate(pageValue, limitValue);
+                else
+                {
+                    var limitValue = Convert.ToInt32(limitParameter.Split('=')[1]);
+                    paginate = new Paginate(pageValue, limitValue);
+                }
+               
                 return true;
             }
             paginate = null;
@@ -99,8 +103,12 @@ namespace Xendor.QueryModel.Expressions.Extensions
                 {
                     slice = new Slice(startValue, null);
                 }
-                var endValue = Convert.ToInt32(endParameter.Split('=')[1]);
-                slice = new Slice(startValue, endValue);
+                else
+                {
+                    var endValue = Convert.ToInt32(endParameter.Split('=')[1]);
+                    slice = new Slice(startValue, endValue);
+                }
+
                 return true;
             }
 

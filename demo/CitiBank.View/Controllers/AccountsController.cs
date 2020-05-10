@@ -4,6 +4,8 @@ using CitiBank.View.Views.Accounts.Criterias;
 using CitiBank.View.Views.Accounts.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Xendor.QueryModel;
 using Xendor.QueryModel.AspNetCore;
 

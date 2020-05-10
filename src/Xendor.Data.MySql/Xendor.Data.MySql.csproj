@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Devart.Data.MySql" Version="8.13.1437" />
+    <PackageReference Include="Devart.Data.MySql" Version="8.17.1612" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using FluentAssertions;
-using Xendor.QueryModel.Expressions;
+using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.Extensions.Primitives;
+using Xendor.QueryModel.Criteria.Slice;
 using Xunit;
 
 namespace Xendor.QueryModel.Tests
@@ -10,10 +13,19 @@ namespace Xendor.QueryModel.Tests
         public void Slice_Start_20_And_End_30()
         {
             //Arrange
-            var slice = new Slice(20, 30);
+            var values = new Dictionary<string, StringValues>
+            {
+                {"_start", new StringValues("20")},
+                {"_end", new StringValues("30")}
+            };
+            var query = new QueryCollection(values);
+
+
 
             //Act
+            var slice = Slice.Extract(query);
             var text = slice.ToString();
+
 
 
             //Assert
@@ -21,15 +33,22 @@ namespace Xendor.QueryModel.Tests
 
 
         }
-
         [Fact]
         public void Slice_Start_20()
         {
             //Arrange
-            var slice = new Slice(20, null);
+            var values = new Dictionary<string, StringValues>
+            {
+                {"_start", new StringValues("20")}
+            };
+            var query = new QueryCollection(values);
+
+
 
             //Act
+            var slice = Slice.Extract(query);
             var text = slice.ToString();
+
 
 
             //Assert
@@ -37,5 +56,29 @@ namespace Xendor.QueryModel.Tests
 
 
         }
+        [Fact]
+        public void Slice_With_Empty()
+        {
+            //Arrange
+            var values = new Dictionary<string, StringValues>
+            {
+                {"_start", new StringValues("A")}
+            };
+            var query = new QueryCollection(values);
+
+
+
+            //Act
+            var slice = Slice.Extract(query);
+
+
+
+
+            //Assert
+            slice.Should().BeOfType<SliceEmpty>();
+
+
+        }
+
     }
 }

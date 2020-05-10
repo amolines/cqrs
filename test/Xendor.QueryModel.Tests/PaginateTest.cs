@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using FluentAssertions;
-using Xendor.QueryModel.Expressions;
+using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.Extensions.Primitives;
+using Xendor.QueryModel.Criteria.Paginate;
 using Xunit;
 
 namespace Xendor.QueryModel.Tests
@@ -7,14 +10,41 @@ namespace Xendor.QueryModel.Tests
     public class PaginateTest
     {
         [Fact]
+        public void Paginate_Page_Empty()
+        {
+            //Arrange
+            var values = new Dictionary<string, StringValues>
+            {
+                {"_pages", new StringValues("7")}
+            };
+            var query = new QueryCollection(values);
+
+
+
+            //Act
+            var paginate = Paginate.Extract(query);
+
+
+            //Assert
+            paginate.Should().BeOfType<PaginateEmpty>();
+
+
+        }
+        [Fact]
         public void Paginate_Page_7_And_Limit_20()
         {
             //Arrange
-            var paginate = new Paginate(7, 20);
+            var values = new Dictionary<string, StringValues>
+            {
+                {"_page", new StringValues("7")}, {"_limit", new StringValues("20")}
+            };
+            var query = new QueryCollection(values);
+
+
 
             //Act
+            var paginate = Paginate.Extract(query);
             var text = paginate.ToString();
-
 
             //Assert
             text.Should().Be("_page=7&_limit=20");
@@ -25,14 +55,20 @@ namespace Xendor.QueryModel.Tests
         public void Paginate_Page_1_With_Default_Limit()
         {
             //Arrange
-            var paginate = new Paginate(1 );
+            var values = new Dictionary<string, StringValues>
+            {
+                {"_page", new StringValues("7")}
+            };
+            var query = new QueryCollection(values);
+
+
 
             //Act
+            var paginate = Paginate.Extract(query);
             var text = paginate.ToString();
 
-
             //Assert
-            text.Should().Be("_page=1&_limit=10");
+            text.Should().Be("_page=7&_limit=10");
 
 
         }

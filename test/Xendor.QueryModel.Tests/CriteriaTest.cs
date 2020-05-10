@@ -8,6 +8,22 @@ namespace Xendor.QueryModel.Tests
     public class CriteriaTest
     {
         [Fact]
+        public void Criteria_With_Filters_In()
+        {
+            //Arrange
+            var criteria = new Criteria<UserFilter>("/api/users", "id=1&id=2&id=4");
+
+            //Act
+            var value = criteria.ToString();
+
+
+            //Assert
+            criteria.Filters.Count().Should().Be(3);
+            value.Should().Be("id=1&id=2&id=4");
+
+        }
+
+        [Fact]
         public void Criteria_With_FullTextSearch()
         {
             //Arrange
@@ -47,6 +63,21 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
+            var criteria = new Criteria<UserFilter>("/api/users", "_page=7");
+
+
+            //Assert
+            criteria.Paginate.Limit.Should().Be(10);
+            criteria.Paginate.Page.Should().Be(7);
+
+        }
+        [Fact]
+        public void Criteria_With_Paginate_Limit()
+        {
+            //Arrange
+
+
+            //Act
             var criteria = new Criteria<UserFilter>("/api/users", "_page=7&_limit=20");
 
 
@@ -55,7 +86,6 @@ namespace Xendor.QueryModel.Tests
             criteria.Paginate.Page.Should().Be(7);
 
         }
-
         [Fact]
         public void Criteria_Sort_IsNull()
         {
@@ -63,7 +93,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Act
-            var criteria = new Criteria<UserFilter>("/api/users", "_sort=userf,views&_order=desc,asc");
+            var criteria = new Criteria<UserFilter>("/api/users", "_sort=user,views&_order=desc,asc");
 
 
             //Assert
@@ -85,10 +115,22 @@ namespace Xendor.QueryModel.Tests
             criteria.Sort.Fields.Count().Should().Be(2);
 
         }
-
-
         [Fact]
-        public void Criteria_With_Slice()
+        public void Criteria_With_Sort_Null()
+        {
+            //Arrange
+
+
+            //Act
+            var criteria = new Criteria<UserFilter>("/api/users", "_sort=namer,lastName&_order=desc,asc");
+
+
+            //Assert
+            criteria.Sort.Should().Be(null);
+
+        }
+        [Fact]
+        public void Criteria_With_Slice_End()
         {
             //Arrange
 
@@ -100,6 +142,20 @@ namespace Xendor.QueryModel.Tests
             //Assert
             criteria.Slice.Start.Should().Be(20);
             criteria.Slice.End.Should().Be(30);
+        }
+        [Fact]
+        public void Criteria_With_Slice()
+        {
+            //Arrange
+
+
+            //Act
+            var criteria = new Criteria<UserFilter>("/api/users", "_start=20");
+
+
+            //Assert
+            criteria.Slice.Start.Should().Be(20);
+            criteria.Slice.End.Should().Be(null);
         }
     }
 }
