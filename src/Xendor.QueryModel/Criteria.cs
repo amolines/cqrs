@@ -16,7 +16,7 @@ namespace Xendor.QueryModel
     public class Criteria<TIn> : ICriteria
         where TIn : IMetaDataExpression
     {
-        private readonly IFilterCollectionExpression _filters;
+        private  IFilterCollectionExpression _filters;
         private readonly IEmbedCollectionExpression _embedCollection;
         public Criteria(string path , IQueryCollection query)
         {
@@ -55,6 +55,8 @@ namespace Xendor.QueryModel
         public bool IsSlice => Slice != null;
         public void AddFilter(string name, string value, Type type)
         {
+            if(_filters == null)
+                _filters = new FilterCollectionExpression<TIn>(new List<Filter>());
             _filters.Add(name,value,type);
         }
        

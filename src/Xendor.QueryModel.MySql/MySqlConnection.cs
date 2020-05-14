@@ -1,4 +1,5 @@
-﻿using Xendor.QueryModel.Data;
+﻿
+using Xendor.QueryModel.QueryProcessor.Infrastructure;
 
 namespace Xendor.QueryModel.MySql
 {

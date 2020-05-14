@@ -76,8 +76,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QueryModel", "QueryModel", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommandModel", "CommandModel", "{3C24483C-B322-4D0C-AE5E-C43B41D67A8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xendor.QueryModel.QueryProcessor", "src\Xendor.QueryModel.QueryProcessor\Xendor.QueryModel.QueryProcessor.csproj", "{AF2BF6B0-A631-4FF4-9DE8-497F7462AFE5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -164,10 +162,6 @@ Global
 		{39BF7CE0-0459-4BD2-B409-E238C0789817}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39BF7CE0-0459-4BD2-B409-E238C0789817}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39BF7CE0-0459-4BD2-B409-E238C0789817}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF2BF6B0-A631-4FF4-9DE8-497F7462AFE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF2BF6B0-A631-4FF4-9DE8-497F7462AFE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF2BF6B0-A631-4FF4-9DE8-497F7462AFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF2BF6B0-A631-4FF4-9DE8-497F7462AFE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -201,7 +195,6 @@ Global
 		{39BF7CE0-0459-4BD2-B409-E238C0789817} = {8D0DCF10-CA48-47D3-9CAC-63447CC11B77}
 		{8D0DCF10-CA48-47D3-9CAC-63447CC11B77} = {61EBBC6F-E955-4B92-8F4E-FB6B2CFFFD25}
 		{3C24483C-B322-4D0C-AE5E-C43B41D67A8B} = {61EBBC6F-E955-4B92-8F4E-FB6B2CFFFD25}
-		{AF2BF6B0-A631-4FF4-9DE8-497F7462AFE5} = {CF135DED-439A-4BDE-A27A-EF068E5C17DA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1CFD3B8-6874-4F74-A437-CB11BF7EFDD0}

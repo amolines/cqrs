@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using CitiBank.View.Views.Accounts.Dtos;
-using Xendor.QueryModel.Data;
+using Xendor.QueryModel.QueryProcessor.Infrastructure;
+
 
 namespace CitiBank.View.Views.Accounts.DataMappers
 {
-    public class OperationDtoDataMapper : IDataMapper<DbDataReader, IEnumerable<OperationDto>>
+    public class OperationDtoDataMapper : IDataMapper<OperationDto>
     {
         public IEnumerable<OperationDto> Mapper(DbDataReader source)
         {

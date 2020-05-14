@@ -6,9 +6,9 @@ using CitiBank.View.Views.Accounts.DataMappers;
 using CitiBank.View.Views.Accounts.Dtos;
 using Microsoft.Extensions.Configuration;
 using Xendor.Extensions;
-using Xendor.QueryModel;
-using Xendor.QueryModel.Data;
 using Xendor.QueryModel.MySql;
+using Xendor.QueryModel.QueryProcessor;
+using Xendor.QueryModel.QueryProcessor.Infrastructure;
 using Xendor.ServiceLocator;
 
 
@@ -22,31 +22,31 @@ namespace CitiBank.View.Extensions
             services.AddXendor();
 
 
-            services.RegisterSingleton<IQueryHandlerFactory, QueryHandlerFactory>();
-            services.RegisterSingleton<IEmbedQueryHandlerFactory, EmbedQueryHandlerFactory>();
-            services.RegisterSingleton<IQueryDispatcher, QueryDispatcher>();
-            services.RegisterSingleton<IDataMapper<DbDataReader, IEnumerable<AccountDto>>, AccountDtoDataMapper>();
-            services.RegisterSingleton<IDataMapper<DbDataReader, IEnumerable<OperationDto>>, OperationDtoDataMapper>();
-            services.RegisterSingleton<IFactoryExpression<ISelectQuery>, DbFactoryExpression>();
+            services.RegisterSingleton<IQueryProcessorRegistry, QueryProcessorRegistry>();
 
-            services.RegisterScoped<IQueryHandler<AccountCriteria>, DbQueryHandler<AccountCriteria, AccountDto, AccountQuery>>();
-            services.RegisterScoped<IEmbedQueryHandler<OperationDto>, DbEmbedQueryHandler<OperationDto, OperationsQuery>>();
+
+
+            services.RegisterScoped<IQueryProcessor<AccountCriteria>, DbQueryProcessor<AccountCriteria, AccountQuery ,AccountDto >>();
+            services.RegisterScoped<IQueryProcessor<OperationCriteria>, DbQueryProcessor<OperationCriteria, OperationsQuery, OperationDto>>();
 
 
 
             var settingsSection = configuration.GetSection("connectionString");
             var connection = settingsSection.Get<MySqlConnection>();
             services.Register<IConnection>(connection);
-
+            /*Registro de Mappers*/
+            services.RegisterSingleton<IDataMapper<AccountDto>, AccountDtoDataMapper>();
+            services.RegisterSingleton<IDataMapper<OperationDto>, OperationDtoDataMapper>();
+            /*Registro de la Base de datos*/
             services.RegisterScoped<IDataBase, MySqlDataBase>();
+            /*Registro del repositorio*/
+            services.RegisterScoped<IRepository<AccountDto>, Repository<AccountDto>>();
+            services.RegisterScoped<IRepository<OperationDto>, Repository<OperationDto>>();
 
 
 
-         
-          
 
-            
-            
+
         }
 
     }

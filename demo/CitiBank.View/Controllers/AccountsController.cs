@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xendor.QueryModel;
 using Xendor.QueryModel.AspNetCore;
+using Xendor.QueryModel.QueryProcessor;
 
 namespace CitiBank.View.Controllers
 {
@@ -15,10 +16,10 @@ namespace CitiBank.View.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        private readonly IQueryDispatcher _queryDispatcher;
-        public AccountsController(IQueryDispatcher queryDispatcher)
+        private readonly IQueryProcessorRegistry _queryProcessorRegistry;
+        public AccountsController(IQueryProcessorRegistry queryProcessorRegistry)
         {
-            _queryDispatcher = queryDispatcher ?? throw new ArgumentNullException(nameof(queryDispatcher));
+            _queryProcessorRegistry = queryProcessorRegistry ?? throw new ArgumentNullException(nameof(queryProcessorRegistry));
         }
 
         /// <summary>
@@ -28,10 +29,11 @@ namespace CitiBank.View.Controllers
         /// <returns></returns>
         [HttpGet]
         [QueryAsyncActionFilter()]
-        public async Task<IQueryResult> Get(Criteria<AccountCriteria> criteria)
+        public async Task<IQueryResponse> Get(Criteria<AccountCriteria> criteria)
         {
-           var query =  await _queryDispatcher.Submit(criteria);
-           return query;
+           var query =   _queryProcessorRegistry.FindQueryProcessor<AccountCriteria>();
+           var response = await query.ProcessAsync(new QueryRequest<AccountCriteria>(criteria));
+           return response;
         }
 
         /// <summary>
@@ -45,13 +47,34 @@ namespace CitiBank.View.Controllers
         {
 
             criteria.AddFilter("id",id.ToString(), typeof(Guid));
-            var query = await _queryDispatcher.Submit(criteria);
-            if (query.Data.Any())
+
+            var query = _queryProcessorRegistry.FindQueryProcessor<AccountCriteria>();
+            var response = await query.ProcessAsync(new QueryRequest<AccountCriteria>(criteria));
+
+
+         
+            if (response.Data.Any())
             {
-               return  (AccountDto)query.Data.GetEnumerator().Current; 
+               return  (AccountDto)response.Data.GetEnumerator().Current; 
             }
 
             return NotFound();
+
+        }
+
+
+        [HttpGet("{id}/operations")]
+        public async Task<IQueryResponse> GetOperations(Guid id, Criteria<OperationCriteria> criteria)
+        {
+
+            criteria.AddFilter("accountId", id.ToString(), typeof(Guid));
+
+            var query = _queryProcessorRegistry.FindQueryProcessor<OperationCriteria>();
+            var response = await query.ProcessAsync(new QueryRequest<OperationCriteria>(criteria));
+
+            return response; ;
+
+   
 
         }
     }

@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Xendor.QueryModel.Data;
+using Xendor.QueryModel.QueryProcessor.Infrastructure;
 
 namespace Xendor.QueryModel.MySql
 {
-    public abstract class MySqlSelect : SelectQuery
+    public abstract class MySqlSelect : Query
     {
         #region Attributes
         private readonly List<string> _where;
@@ -33,7 +32,12 @@ namespace Xendor.QueryModel.MySql
                 _where = where;
             }
             public override string Sql => $"SELECT COUNT(*) {_joins} {_where} ";
+            public override void SetCriteria(ICriteria criteria)
+            {
+                throw new System.NotImplementedException();
+            }
 
+            public override IQuery SqlCount => throw new System.NotImplementedException();
         }
         public override void SetCriteria(ICriteria criteria)
         {

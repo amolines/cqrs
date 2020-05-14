@@ -4,7 +4,7 @@ using Xendor.QueryModel;
 
 namespace CitiBank.View.Views.Accounts.Dtos
 {
-    public class AccountDto : RootDto
+    public class AccountDto : IDto
     {
         public Guid Id { get; set; }
         public string Number { get; set; }

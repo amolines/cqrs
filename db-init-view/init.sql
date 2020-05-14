@@ -113,5 +113,11 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`dbuser`@`%` SQL SECURITY DEFINER VIEW `view.
 -- View structure for view.operations
 -- ----------------------------
 DROP VIEW IF EXISTS `view.operations`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`dbuser`@`%` SQL SECURITY DEFINER VIEW `view.operations` AS select `operations`.`Date` AS `Date`,`operations`.`Amount` AS `Amount`,`operations`.`Description` AS `Description`,`operations`.`AccountId` AS `AccountId` from `operations` ;
+create definer = dbuser@`%` view `view.operations` as
+select `view`.`operations`.`Date`        AS `Date`,
+       `view`.`operations`.`Amount`      AS `Amount`,
+       `view`.`operations`.`Description` AS `Description`,
+       `a`.`AggregateId`                 AS `AccountId`
+from (`view`.`operations`
+         join `view`.`accounts` `a` on ((`view`.`operations`.`AccountId` = `a`.`Id`)));
 SET FOREIGN_KEY_CHECKS=1;

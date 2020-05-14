@@ -4,7 +4,7 @@ namespace Xendor.QueryModel.Expressions.Paginate
 {
     public class PaginateExpression: IPaginateExpression
     {
-        internal PaginateExpression(int page, int limitByDefault = 10)
+        public  PaginateExpression(int page, int limitByDefault = 10)
         {
             Page = page;
             Limit = limitByDefault;
