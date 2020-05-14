@@ -1,9 +1,9 @@
-﻿using Xendor.QueryModel.Criteria;
-using Xendor.ServiceLocator;
+﻿using Xendor.QueryModel.Expressions;
+
 
 namespace Xendor.QueryModel
 {
-    public interface IQueryHandlerFactory : ISingletonLifestyle
+    public interface IQueryHandlerFactory 
     {
         IQueryHandler<TIn> CreateQueryHandler<TIn>()
             where TIn : IMetaDataExpression;

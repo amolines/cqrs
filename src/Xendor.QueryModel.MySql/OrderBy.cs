@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Xendor.QueryModel.Criteria.OrderBy;
+using Xendor.QueryModel.Expressions.OrderBy;
 
 namespace Xendor.QueryModel.MySql
 {

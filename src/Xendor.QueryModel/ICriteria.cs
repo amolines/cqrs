@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Xendor.QueryModel.Criteria.FilterCollection;
-using Xendor.QueryModel.Criteria.FullTextSearch;
-using Xendor.QueryModel.Criteria.OrderBy;
-using Xendor.QueryModel.Criteria.Paginate;
-using Xendor.QueryModel.Criteria.Slice;
-using Xendor.QueryModel.Expressions;
+using Xendor.QueryModel.Expressions.EmbedCollection;
+using Xendor.QueryModel.Expressions.FilterCollection;
+using Xendor.QueryModel.Expressions.FullTextSearch;
+using Xendor.QueryModel.Expressions.OrderBy;
+using Xendor.QueryModel.Expressions.Paginate;
+using Xendor.QueryModel.Expressions.Slice;
 
 namespace Xendor.QueryModel
 {
@@ -13,11 +13,11 @@ namespace Xendor.QueryModel
     {
         IPaginateExpression Paginate { get; }
         IOrderByExpression Sort { get; }
-        EmbedCollection Embeds { get; }
+        IEmbedCollectionExpression Embeds { get; }
         IFullTextSearchExpression FullTextSearch { get; }
         ISliceExpression Slice { get; }
         string Path { get; }
-        IEnumerable<Filter> Filters { get; }
+        IFilterCollectionExpression Filters { get; }
         bool IsPaginate { get; }
         bool IsSlice { get; }
 

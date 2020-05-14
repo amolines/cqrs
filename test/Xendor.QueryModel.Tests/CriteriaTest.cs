@@ -3,7 +3,7 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Primitives;
-using Xendor.QueryModel.Criteria.OrderBy;
+using Xendor.QueryModel.Expressions.OrderBy;
 using Xendor.QueryModel.Tests.Code;
 using Xunit;
 
@@ -26,7 +26,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Assert
-            criteria.Filters.Count().Should().Be(3);
+            criteria.Filters.Filters.Count().Should().Be(3);
             value.Should().Be("id=1&id=2&id=4");
 
         }
@@ -47,7 +47,7 @@ namespace Xendor.QueryModel.Tests
 
             //Assert
             criteria.FullTextSearch.Name.Count().Should().Be(2);
-            value.Should().Be("q=alejandro");
+            value.Should().Be("_q=alejandro");
 
         }
 
@@ -69,7 +69,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Assert
-            criteria.Filters.Count().Should().Be(3);
+            criteria.Filters.Filters.Count().Should().Be(3);
             value.Should().Be("name=alejandro&lastName=molines&address.cp=08204");
 
         }
@@ -147,7 +147,7 @@ namespace Xendor.QueryModel.Tests
 
 
             //Assert
-            criteria.Sort.Should().BeOfType<OrderByEmptyExpression<UserFilter>>();
+            criteria.Sort.Should().BeNull();
 
         }
         [Fact]

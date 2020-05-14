@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Xendor.QueryModel.Criteria.Converts;
-using Xendor.QueryModel.Criteria.FilterCollection;
-using Xendor.QueryModel.Expressions;
+using Xendor.QueryModel.Converts;
+using Xendor.QueryModel.Expressions.FilterCollection;
 
 namespace Xendor.QueryModel.MySql
 {
@@ -14,7 +13,7 @@ namespace Xendor.QueryModel.MySql
         public Where(IEnumerable<Filter> filters)
         {
             _parameters = new Dictionary<string, object>();
-            var convert = new Convert();
+            var convert = new ConvertFactory();
 
             var @where = new List<string>();
             var count = 1;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Xendor.QueryModel.Criteria.Paginate;
-using Xendor.QueryModel.Criteria.Slice;
+using Xendor.QueryModel.Expressions.Paginate;
+using Xendor.QueryModel.Expressions.Slice;
 
 namespace Xendor.QueryModel.MySql
 {

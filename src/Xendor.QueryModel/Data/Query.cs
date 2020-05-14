@@ -1,0 +1,18 @@
+﻿using System.Collections.Generic;
+
+namespace Xendor.QueryModel.Data
+{
+    public abstract class Query : IQuery
+    {
+        protected Query() { }
+
+        protected Query(IDictionary<string, object> parameters)
+        {
+            Parameters = parameters;
+        }
+
+        public IDictionary<string, object> Parameters { get; }
+        public abstract string Sql { get; }
+
+    }
+}

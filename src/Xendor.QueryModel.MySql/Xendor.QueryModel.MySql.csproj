@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Devart.Data.MySql" Version="8.17.1612" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Xendor.QueryModel\Xendor.QueryModel.csproj" />
   </ItemGroup>
 

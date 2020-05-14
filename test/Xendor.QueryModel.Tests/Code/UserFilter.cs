@@ -1,12 +1,12 @@
 using Xendor.QueryModel.Attributes;
-using Xendor.QueryModel.Criteria;
+using Xendor.QueryModel.Expressions;
 
 namespace Xendor.QueryModel.Tests.Code
 {
 
     public class UserFilter : IMetaDataExpression
     {
-        [Field("id", false)]
+        [Field("id")]
         public int Id { get; set; }
         [Field("name", true)]
         public string Name { get; set; }

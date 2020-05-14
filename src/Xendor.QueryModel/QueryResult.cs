@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Xendor.Extensions.Collections.Generic;
+using Xendor.QueryModel.Extensions.Collections.Generic;
 
 namespace Xendor.QueryModel
 {

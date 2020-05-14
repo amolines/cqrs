@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
-using Xendor.Data;
-using Xendor.QueryModel.Criteria;
 using Xendor.QueryModel.Expressions;
+using Xendor.QueryModel.Expressions.EmbedCollection;
 
 namespace Xendor.QueryModel.Data
 {
@@ -14,23 +13,23 @@ namespace Xendor.QueryModel.Data
         where TIn : IMetaDataExpression
         where TQuery :  ISelectQuery, new()
     {
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
+        private readonly IDataBase _connection;
         private readonly IDataMapper<DbDataReader, IEnumerable<TOut>> _outDataMapper;
         private readonly IFactoryExpression<ISelectQuery> _factoryExpression;
         protected readonly IQueryDispatcher QueryDispatcher;
 
-        public DbQueryHandler(IUnitOfWorkManager unitOfWorkManager,
+        public DbQueryHandler(IDataBase connection,
             IDataMapper<DbDataReader, IEnumerable<TOut>> outDataMapper,
             IFactoryExpression<ISelectQuery> factoryExpression,
             IQueryDispatcher queryDispatcher)
         {
-            _unitOfWorkManager = unitOfWorkManager ?? throw new ArgumentNullException(nameof(unitOfWorkManager));
+            _connection = connection ?? throw new ArgumentNullException(nameof(connection));
             _outDataMapper = outDataMapper ?? throw new ArgumentNullException(nameof(outDataMapper));
             _factoryExpression = factoryExpression ?? throw new ArgumentNullException(nameof(factoryExpression));
             QueryDispatcher = queryDispatcher ?? throw new ArgumentNullException(nameof(queryDispatcher));
         }
 
-        protected virtual void SetEmbeds(EmbedCollection embeds, IRootDto root)
+        protected virtual void SetEmbeds(IEmbedCollectionExpression embeds, IRootDto root)
         {
             foreach (var embed in embeds.Embeds)
             {
@@ -45,17 +44,17 @@ namespace Xendor.QueryModel.Data
         }
         private async Task<IQueryResult> Execute(ICriteria criteria)
         {
-            var unitofWork = _unitOfWorkManager.New();
             var query = _factoryExpression.Create<TQuery>(criteria);
-
             try
             {
-                var dbDataReader = await unitofWork.ExecuteReaderAsync(query);
+                var dbDataReader = await _connection.ExecuteReaderAsync(query);
                 var data = _outDataMapper.Mapper(dbDataReader);
                 foreach (var root in data)
                 {
-                    SetEmbeds(criteria.Embeds, root);
+                    if(criteria.Embeds != null && criteria.Embeds.Any())
+                        SetEmbeds(criteria.Embeds, root);
                 }
+
                 IQueryResult result;
                 if (!criteria.IsSlice && !criteria.IsPaginate)
                 {
@@ -63,8 +62,8 @@ namespace Xendor.QueryModel.Data
                 }
                 else
                 {
-                    var total = await unitofWork.ExecuteScalarAsync(query.SqlCount);
-                    var value = (long)Convert.ChangeType(total, typeof(long));
+                    var total = await _connection.ExecuteScalarAsync(query.SqlCount);
+                    var value = (long) Convert.ChangeType(total, typeof(long));
                     if (criteria.Paginate != null)
                     {
                         result = new PaginateQueryResult<TOut>(data, new PaginateQueryHeader(criteria, value));
@@ -74,7 +73,6 @@ namespace Xendor.QueryModel.Data
                         result = new SliceQueryResult<TOut>(data, new SliceQueryHeader(value));
                     }
                 }
-                unitofWork.Dispose();
                 return result;
 
             }

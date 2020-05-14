@@ -10,10 +10,24 @@ namespace Xendor.ServiceLocator
         void Register<TService>()
             where TService : class;
 
+
+        void RegisterTransient<TContract, TService>()
+            where TContract : class
+            where TService : class, TContract;
+        void RegisterScoped<TContract, TService>()
+            where TContract : class
+            where TService : class, TContract;
+        void RegisterSingleton<TContract, TService>()
+            where TContract : class
+            where TService : class, TContract;
+
+
+
         void Register<TContract, TService>()
             where TContract : class
             where TService : class, TContract;
 
+        
         void Register(Type contract, Type service);
 
 
@@ -22,3 +36,5 @@ namespace Xendor.ServiceLocator
 
     }
 }
+
+

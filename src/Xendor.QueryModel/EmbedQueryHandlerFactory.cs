@@ -13,7 +13,7 @@ namespace Xendor.QueryModel
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
 
-        public IEmbedQueryHandler<TOut> CreateEmbedQueryHandler<TOut>() 
+        public IEmbedQueryHandler<TOut> CreateEmbedQueryHandler<TOut>()
             where TOut : IDto
         {
             var handler = _serviceProvider.GetService<IEmbedQueryHandler<TOut>>();

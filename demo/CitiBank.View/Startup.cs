@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using SimpleInjector;
 using Xendor.QueryModel.AspNetCore;
 using Xendor.ServiceLocator;
+using Xendor.ServiceLocator.SimpleInjector;
 using Xendor.ServiceLocator.SimpleInjector.Extensions;
 
 namespace CitiBank.View
@@ -39,6 +40,12 @@ namespace CitiBank.View
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             var serviceLocator = ServiceLocatorFactory.Instance();
+
+
+
+            var container = (SimpleInjectorServiceLocator)ServiceLocatorFactory.Instance();
+            app.UseSimpleInjector(container.Container);
+
             serviceLocator.InitializeContainer(Configuration);
             serviceLocator.Verify();
             if (env.IsDevelopment())

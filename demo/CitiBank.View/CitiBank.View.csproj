@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Xendor.Data.MySql\Xendor.Data.MySql.csproj" />
     <ProjectReference Include="..\..\src\Xendor.QueryModel.AspNetCore\Xendor.QueryModel.AspNetCore.csproj" />
     <ProjectReference Include="..\..\src\Xendor.QueryModel.MySql\Xendor.QueryModel.MySql.csproj" />
     <ProjectReference Include="..\..\src\Xendor.QueryModel\Xendor.QueryModel.csproj" />

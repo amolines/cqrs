@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Xendor.Extensions.Collections.Generic;
-using Xendor.Extensions.Reflection;
+using Xendor.QueryModel.Extensions.Collections.Generic;
+using Xendor.QueryModel.Extensions.Reflection;
 
 namespace Xendor.QueryModel.Attributes
 {

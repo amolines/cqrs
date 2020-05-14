@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Xendor.Data;
+using System.Threading.Tasks;
 using Xendor.QueryModel.Data;
 
 namespace Xendor.QueryModel.MySql
@@ -68,9 +68,9 @@ namespace Xendor.QueryModel.MySql
                 _where.Add(fullTextSearch.Sql);
             }
 
-            if (criteria.Filters.Any())
+            if (criteria.Filters.Filters.Any())
             {
-                var filters = new Where(criteria.Filters);
+                var filters = new Where(criteria.Filters.Filters);
                 filters.AddParameters(Parameters);
                 _where.Add(filters.Sql);
             }

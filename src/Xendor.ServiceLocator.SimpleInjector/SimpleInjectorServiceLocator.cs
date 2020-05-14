@@ -11,7 +11,7 @@ namespace Xendor.ServiceLocator.SimpleInjector
         {
             Container = container ?? throw new ArgumentNullException(nameof(container));
         }
-        internal Container Container { get; }
+        public  Container Container { get; }
         #region IServiceLocator
         public TService GetService<TService>()
             where TService : class
@@ -44,6 +44,35 @@ namespace Xendor.ServiceLocator.SimpleInjector
                 Container.Register<TService>(service.IsAssignableFrom<IScopedLifestyle>() ? Lifestyle.Scoped : Lifestyle.Singleton);
             }
         }
+
+        public void RegisterTransient<TContract, TService>() 
+            where TContract : class
+            where TService : class, TContract
+        {
+            var contract = typeof(TContract);
+            var service = typeof(TService);
+            Container.Register(contract, service, Lifestyle.Transient);
+        }
+
+        public void RegisterScoped<TContract, TService>() 
+            where TContract : class
+            where TService : class, TContract
+        {
+            var contract = typeof(TContract);
+            var service = typeof(TService);
+            Container.Register(contract, service, Lifestyle.Scoped);
+        }
+
+        public void RegisterSingleton<TContract, TService>()
+            where TContract : class 
+            where TService : class, TContract
+        {
+            var contract = typeof(TContract);
+            var service = typeof(TService);
+            Container.Register(contract, service, Lifestyle.Singleton);
+
+        }
+
         public void Register<TContract, TService>()
             where TContract : class 
             where TService : class, TContract

@@ -5,14 +5,12 @@ using CitiBank.View.Views.Accounts.Criterias;
 using CitiBank.View.Views.Accounts.DataMappers;
 using CitiBank.View.Views.Accounts.Dtos;
 using Microsoft.Extensions.Configuration;
-using Xendor.Data;
-using Xendor.Data.Extensions;
-using Xendor.Data.MySql;
 using Xendor.Extensions;
 using Xendor.QueryModel;
 using Xendor.QueryModel.Data;
-using Xendor.QueryModel.Expressions;
+using Xendor.QueryModel.MySql;
 using Xendor.ServiceLocator;
+
 
 namespace CitiBank.View.Extensions
 {
@@ -22,23 +20,33 @@ namespace CitiBank.View.Extensions
         public static void InitializeContainer(this IServiceLocator services, IConfiguration configuration)
         {
             services.AddXendor();
-            services.AddUnitOfWorkConnection<MySqlConnection>(configuration, "connectionString");
-            services.Register<IUnitOfWorkManager, UnitOfWorkManager>();
-            services.Register<IUnitOfWorkFactory, MySqlUnitOfWorkFactory>();
+
+
+            services.RegisterSingleton<IQueryHandlerFactory, QueryHandlerFactory>();
+            services.RegisterSingleton<IEmbedQueryHandlerFactory, EmbedQueryHandlerFactory>();
+            services.RegisterSingleton<IQueryDispatcher, QueryDispatcher>();
+            services.RegisterSingleton<IDataMapper<DbDataReader, IEnumerable<AccountDto>>, AccountDtoDataMapper>();
+            services.RegisterSingleton<IDataMapper<DbDataReader, IEnumerable<OperationDto>>, OperationDtoDataMapper>();
+            services.RegisterSingleton<IFactoryExpression<ISelectQuery>, DbFactoryExpression>();
+
+            services.RegisterScoped<IQueryHandler<AccountCriteria>, DbQueryHandler<AccountCriteria, AccountDto, AccountQuery>>();
+            services.RegisterScoped<IEmbedQueryHandler<OperationDto>, DbEmbedQueryHandler<OperationDto, OperationsQuery>>();
 
 
 
-            services.Register<IQueryHandler<AccountCriteria>, DbQueryHandler<AccountCriteria, AccountDto, AccountQuery>>();
-            services.Register<IEmbedQueryHandler<OperationDto>, DbEmbedQueryHandler<OperationDto,  OperationsQuery>>();
+            var settingsSection = configuration.GetSection("connectionString");
+            var connection = settingsSection.Get<MySqlConnection>();
+            services.Register<IConnection>(connection);
 
-            services.Register<IDataMapper<DbDataReader, IEnumerable<AccountDto>>, AccountDtoDataMapper>();
-            services.Register<IDataMapper<DbDataReader, IEnumerable<OperationDto>>, OperationDtoDataMapper>();
+            services.RegisterScoped<IDataBase, MySqlDataBase>();
 
-            services.Register<IFactoryExpression<ISelectQuery> , DbFactoryExpression>();
 
-            services.Register<IQueryHandlerFactory, QueryHandlerFactory>();
-            services.Register<IEmbedQueryHandlerFactory, EmbedQueryHandlerFactory>();
-            services.Register<IQueryDispatcher,QueryDispatcher>();
+
+         
+          
+
+            
+            
         }
 
     }

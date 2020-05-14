@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Xendor.QueryModel.Criteria.FullTextSearch;
-using Xendor.QueryModel.Expressions;
+using Xendor.QueryModel.Expressions.FullTextSearch;
 
 namespace Xendor.QueryModel.MySql
 {

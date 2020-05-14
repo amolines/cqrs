@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -15,11 +16,15 @@ namespace Xendor.QueryModel.AspNetCore
             #region execute any code after the action executes
             var objectResult = result.Result as ObjectResult;
             var query = objectResult.Value as IQueryResult;
-            foreach (var value in query.Header.Value)
+            if (query.Header != null && query.Header.Value != null && query.Header.Value.Any())
             {
-                if(!string.IsNullOrEmpty(value.Value))
-                    context.HttpContext.Response.Headers.Add(value.Key, value.Value);
+                foreach (var value in query.Header.Value)
+                {
+                    if (!string.IsNullOrEmpty(value.Value))
+                        context.HttpContext.Response.Headers.Add(value.Key, value.Value);
+                }
             }
+            
             objectResult.Value = query.Data;
             #endregion
         }

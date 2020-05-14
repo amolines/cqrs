@@ -15,4 +15,12 @@ namespace Xendor.ServiceLocator.SimpleInjector.Extensions
             services.AddSimpleInjector(serviceLocator.Container, setupAction);
         }
     }
+
+
+
+
+ 
+
+
+    
 }

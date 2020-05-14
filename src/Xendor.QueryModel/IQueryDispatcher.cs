@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xendor.QueryModel.Criteria;
-using Xendor.ServiceLocator;
+using Xendor.QueryModel.Expressions;
 
 namespace Xendor.QueryModel
 {
-    public interface IQueryDispatcher : ISingletonLifestyle
+    public interface IQueryDispatcher 
     {
         Task<IQueryResult> Submit<TIn>(Criteria<TIn> criteria)
             where TIn : IMetaDataExpression;

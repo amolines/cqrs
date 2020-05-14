@@ -1,13 +1,18 @@
+using System;
 using System.Threading.Tasks;
-using Xendor.QueryModel.Criteria;
-using Xendor.ServiceLocator;
+using Microsoft.Extensions.Logging;
+using Xendor.QueryModel.Expressions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Xendor.QueryModel
 {
 
-    public interface IQueryHandler<TIn> : IScopedLifestyle 
+    public interface IQueryHandler<TIn>  
         where TIn : IMetaDataExpression
     {
         Task<IQueryResult> Handle(Criteria<TIn> criteria);
     }
+
+
+   
 }

@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xendor.QueryModel.Attributes;
-using Xendor.QueryModel.Criteria.Paginate;
-using Xendor.QueryModel.Expressions;
+using Xendor.QueryModel.Expressions.Paginate;
 
 namespace Xendor.QueryModel
 {
@@ -26,7 +25,7 @@ namespace Xendor.QueryModel
         private void Init()
         {
             var expression = new List<string>();
-            if (_criteria.Filters != null && _criteria.Filters.Any())
+            if (_criteria.Filters != null && _criteria.Filters.Filters.Any())
                 expression.Add(_criteria.Filters.ToString());
             if (_criteria.Sort != null)
                 expression.Add(_criteria.Sort.ToString());

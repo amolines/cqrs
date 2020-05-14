@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using CitiBank.View.Views.Accounts.Dtos;
-using Xendor.Data;
+using Xendor.QueryModel.Data;
 
 namespace CitiBank.View.Views.Accounts.DataMappers
 {

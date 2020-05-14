@@ -1,6 +1,6 @@
 using CitiBank.View.Views.Accounts.Dtos;
 using Xendor.QueryModel.Attributes;
-using Xendor.QueryModel.Criteria;
+using Xendor.QueryModel.Expressions;
 
 namespace CitiBank.View.Views.Accounts.Criterias
 {

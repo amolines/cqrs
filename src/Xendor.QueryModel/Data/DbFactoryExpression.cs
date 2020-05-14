@@ -1,6 +1,4 @@
-﻿using Xendor.QueryModel.Expressions;
-
-namespace Xendor.QueryModel.Data
+﻿namespace Xendor.QueryModel.Data
 {
     public  class DbFactoryExpression : IFactoryExpression<ISelectQuery>
     {
