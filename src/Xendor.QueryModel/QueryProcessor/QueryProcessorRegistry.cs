@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
 using Xendor.QueryModel.Expressions;
 using Xendor.ServiceLocator;
 
@@ -27,5 +26,7 @@ namespace Xendor.QueryModel.QueryProcessor
 
             return loggingProcessor;
         }
+
+      
     }
 }

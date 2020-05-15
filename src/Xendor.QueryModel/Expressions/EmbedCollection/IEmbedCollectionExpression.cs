@@ -6,7 +6,7 @@ namespace Xendor.QueryModel.Expressions.EmbedCollection
     public interface IEmbedCollectionExpression : IExpression
     {
         IEnumerable<Embed> Embeds { get; }
-        void Add(string name, Type type);
+        void Add(string name);
         bool Any();
         bool Any(string name);
     }

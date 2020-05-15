@@ -27,7 +27,7 @@ namespace Xendor.QueryModel.Expressions.EmbedCollection
             var values = GetValue(EmbedCollectionReservedWords.KeyEmbed);
             if (!values.Length.Equals(1)) return false;
             var names = values[0].Split(',');
-            var count = names.Count(value => embeds.ContainsKey(value));
+            var count = names.Count(value => embeds.Contains(value));
             if (count.Equals(names.Length))
             {
                 isValid = true;
@@ -42,7 +42,7 @@ namespace Xendor.QueryModel.Expressions.EmbedCollection
             var values = GetValue(EmbedCollectionReservedWords.KeyEmbed)[0];
             foreach (var value in values.Split(','))
             {
-                embedCollection.Add(value, embeds[value]);
+                embedCollection.Add(value);
             }
             return embedCollection;
         }

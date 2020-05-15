@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Xendor.QueryModel.Expressions.FilterCollection;
+using Xendor.QueryModel.Expressions.OperatorCollection;
 using Xendor.QueryModel.QueryProcessor.Infrastructure;
 
 namespace Xendor.QueryModel.MySql
@@ -72,12 +74,27 @@ namespace Xendor.QueryModel.MySql
                 _where.Add(fullTextSearch.Sql);
             }
 
-            if (criteria.Filters.Filters.Any())
+
+            IEnumerable<Filter> filter;
+            IEnumerable<Operator> operators;
+
+            if (criteria.Filters != null && criteria.Filters.Filters.Any())
+                filter = criteria.Filters.Filters;
+            else
             {
-                var filters = new Where(criteria.Filters.Filters);
-                filters.AddParameters(Parameters);
-                _where.Add(filters.Sql);
+                filter = new List<Filter>();
             }
+
+            if (criteria.Operators != null && criteria.Operators.Operators.Any())
+                operators = criteria.Operators.Operators;
+            else
+            {
+                operators = new List<Operator>();
+            }
+
+            var filters = new Where(filter, operators);
+            filters.AddParameters(Parameters);
+            _where.Add(filters.Sql);
         }
         protected abstract string Select { get;  }
         protected abstract string Joins { get;  }

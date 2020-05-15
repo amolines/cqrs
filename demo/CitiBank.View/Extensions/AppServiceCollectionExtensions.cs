@@ -21,12 +21,8 @@ namespace CitiBank.View.Extensions
         {
             services.AddXendor();
 
-
             services.RegisterSingleton<IQueryProcessorRegistry, QueryProcessorRegistry>();
-
-
-
-            services.RegisterScoped<IQueryProcessor<AccountCriteria>, DbQueryProcessor<AccountCriteria, AccountQuery ,AccountDto >>();
+            services.RegisterScoped<IQueryProcessor<AccountCriteria>, AccountDbQueryProcessor>();
             services.RegisterScoped<IQueryProcessor<OperationCriteria>, DbQueryProcessor<OperationCriteria, OperationsQuery, OperationDto>>();
 
 
@@ -34,12 +30,12 @@ namespace CitiBank.View.Extensions
             var settingsSection = configuration.GetSection("connectionString");
             var connection = settingsSection.Get<MySqlConnection>();
             services.Register<IConnection>(connection);
-            /*Registro de Mappers*/
+            /*Mappers*/
             services.RegisterSingleton<IDataMapper<AccountDto>, AccountDtoDataMapper>();
             services.RegisterSingleton<IDataMapper<OperationDto>, OperationDtoDataMapper>();
-            /*Registro de la Base de datos*/
+            /*Database*/
             services.RegisterScoped<IDataBase, MySqlDataBase>();
-            /*Registro del repositorio*/
+            /*Repository*/
             services.RegisterScoped<IRepository<AccountDto>, Repository<AccountDto>>();
             services.RegisterScoped<IRepository<OperationDto>, Repository<OperationDto>>();
 

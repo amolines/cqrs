@@ -8,5 +8,10 @@ namespace CitiBank.View.Views.Accounts.Criterias
     {
         [Field("id")]
         public Guid AccountId { get; set; }
+        [Field("description")]
+        public decimal Description { get; set; }
+
+        [Field("amount")]
+        public decimal Amount { get; set; }
     }
 }

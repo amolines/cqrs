@@ -1,4 +1,5 @@
-﻿using Xendor.QueryModel.Expressions;
+﻿using System;
+using Xendor.QueryModel.Expressions;
 
 namespace Xendor.QueryModel.QueryProcessor
 {
@@ -6,5 +7,8 @@ namespace Xendor.QueryModel.QueryProcessor
     {
         IQueryProcessor<TCriteria> FindQueryProcessor<TCriteria>()
             where TCriteria : IMetaDataExpression;
+
+
+
     }
 }

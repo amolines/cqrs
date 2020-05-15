@@ -16,11 +16,14 @@ namespace Xendor.QueryModel.Tests.Code
         public string Dni { get; set; }
         [DeepField("address")]
         public Address Address { get; set; }
+
+        [Field("age")]
+        public int Age { get; set; }
     }
 
     public class UserMetaDataCriteria : IMetaDataExpression
     {
-        [Field("id", false)]
+        [Field("id")]
         public int Id { get; set; }
         [Field("name", true)]
         public string Name { get; set; }
@@ -30,5 +33,7 @@ namespace Xendor.QueryModel.Tests.Code
         public string Dni { get; set; }
         [DeepField("address")]
         public Address Address { get; set; }
+        [Field("age")]
+        public int Age { get; set; }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xendor.QueryModel.Converts;
 using Xendor.QueryModel.Expressions.FilterCollection;
+using Xendor.QueryModel.Expressions.OperatorCollection;
 
 namespace Xendor.QueryModel.MySql
 {
@@ -10,7 +12,7 @@ namespace Xendor.QueryModel.MySql
 
         private readonly string _where;
         private IDictionary<string, object> _parameters;
-        public Where(IEnumerable<Filter> filters)
+        public Where(IEnumerable<Filter> filters, IEnumerable<Operator> operators)
         {
             _parameters = new Dictionary<string, object>();
             var convert = new ConvertFactory();
@@ -39,6 +41,45 @@ namespace Xendor.QueryModel.MySql
                     count++;
                 }
             }
+
+
+            foreach (var @operator in operators)
+            {
+                var value = convert.Parse(@operator.Type, @operator.Value);
+
+
+                switch (@operator.Operators)
+                {
+                    case Operators.GreaterThat:
+                        @where.Add($"`{@operator.Name }` > @p{count}");
+                        break;
+                    case Operators.LessThat:
+                        @where.Add($"`{@operator.Name }` < @p{count}");
+                        break;
+                    case Operators.GreaterThatOrEqual:
+                        @where.Add($"`{@operator.Name }` >= @p{count}");
+                        break;
+                    case Operators.LessThatOrEqual:
+                        @where.Add($"`{@operator.Name }` <= @p{count}");
+                        break;
+                    case Operators.Like:
+                        @where.Add($"`{@operator.Name }` LIKE @p{count}");
+                        value = $"'%{value}%'";
+                        break;
+                    case Operators.Distinct:
+                        @where.Add($"`{@operator.Name }` <> @p{count}");
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+            
+
+                _parameters.Add($"@p{count}", value);
+                count++;
+
+            }
+
             _where = string.Join(" AND ", @where);
 
         }

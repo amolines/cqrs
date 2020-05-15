@@ -29,9 +29,9 @@ namespace Xendor.QueryModel.Expressions.EmbedCollection
             var filters = string.Join(",", _embeds.Select(f => f.Name));
             return filters;
         }
-        public void Add(string name, Type type)
+        public void Add(string name)
         {
-            var filter = new Embed(name, type);
+            var filter = new Embed(name);
             _embeds.Add(filter);
         }
         public bool Any()

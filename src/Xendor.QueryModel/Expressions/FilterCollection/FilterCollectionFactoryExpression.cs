@@ -16,13 +16,13 @@ namespace Xendor.QueryModel.Expressions.FilterCollection
 
         protected override bool Contains()
         {
-            return Keys.Any(k => !k.StartsWith("_"));
+            return Keys.Any(k => !k.Contains("_"));
         }
 
         protected override bool Validate()
         {
             var fields = Cache.GetFields<TMetaData>().Keys;
-            var filters = Keys.Where(k => !k.StartsWith("_")).ToList();
+            var filters = Keys.Where(k => !k.Contains("_")).ToList();
             return filters.Distinct().Intersect(fields).Count().Equals(filters.Distinct().Count());
         }
 
@@ -30,7 +30,7 @@ namespace Xendor.QueryModel.Expressions.FilterCollection
         {
             var fields = Cache.GetFields<TMetaData>();
             var filters = new List<Filter>();
-            var keys = Keys.Where(k => !k.StartsWith("_"));
+            var keys = Keys.Where(k => !k.Contains("_"));
             foreach (var key in keys)
             {
 

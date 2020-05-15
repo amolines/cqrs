@@ -31,6 +31,29 @@ namespace Xendor.QueryModel.Tests
 
         }
 
+
+
+        [Fact]
+        public void Criteria_With_Operators_gt_and_lt()
+        {
+            //Arrange
+            var query = new QueryCollection(new Dictionary<string, StringValues>()
+            {
+                {"age_gt", new StringValues("25")},
+                {"age_lt", new StringValues("20")}
+            });
+            var criteria = new Criteria<UserFilter>("/api/users", query);
+
+            //Act
+            var value = criteria.ToString();
+
+
+            //Assert
+            criteria.Operators.Operators.Count().Should().Be(2);
+            value.Should().Be("age_gt=25&age_lt=20");
+
+        }
+
         [Fact]
         public void Criteria_With_FullTextSearch()
         {

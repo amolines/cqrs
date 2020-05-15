@@ -1,10 +1,9 @@
-using CitiBank.View.Views.Accounts.Dtos;
 using Xendor.QueryModel.Attributes;
 using Xendor.QueryModel.Expressions;
 
 namespace CitiBank.View.Views.Accounts.Criterias
 {
-    [EmbedField("operations" , typeof(OperationDto))]
+    [EmbedField("operations")]
     public class AccountCriteria : IMetaDataExpression
     {
         [Field("number")]

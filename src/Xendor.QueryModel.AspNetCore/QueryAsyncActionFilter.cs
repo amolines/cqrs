@@ -12,21 +12,44 @@ namespace Xendor.QueryModel.AspNetCore
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             #region execute any code before the action executes
+
+
             #endregion
+
             var result = await next();
+
+
             #region execute any code after the action executes
-            var objectResult = result.Result as ObjectResult;
-            var query = objectResult.Value as IQueryResponse;
-            if (query.Header != null && query.Header.Value != null && query.Header.Value.Any())
+
+            if(result.Result is ObjectResult objectResult)
             {
-                foreach (var value in query.Header.Value)
+                if (!(objectResult.Value is IQueryResponse query))
                 {
-                    if (!string.IsNullOrEmpty(value.Value))
-                        context.HttpContext.Response.Headers.Add(value.Key, value.Value);
+
+                }
+                else
+                {
+                    if (query.Data.Count > 0)
+                    {
+                        if (query.Header?.Value != null && query.Header.Value.Any())
+                        {
+                            foreach (var value in query.Header.Value)
+                            {
+                                if (!string.IsNullOrEmpty(value.Value))
+                                    context.HttpContext.Response.Headers.Add(value.Key, value.Value);
+                            }
+                        }
+
+                        objectResult.Value = query.Data;
+                    }
+                    else
+                    {
+                        objectResult.StatusCode = 404;
+                        objectResult.Value = null;
+                    }
                 }
             }
-            
-            objectResult.Value = query.Data;
+           
             #endregion
         }
     }

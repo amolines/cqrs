@@ -3,9 +3,13 @@ using Xendor.QueryModel.Expressions;
 
 namespace Xendor.QueryModel.QueryProcessor
 {
-    public interface IQueryProcessor<TCriteria>
+
+    public interface IQueryProcessor<TCriteria> 
         where TCriteria : IMetaDataExpression
     {
         Task<IQueryResponse> ProcessAsync(QueryRequest<TCriteria> request);
     }
+
+
+   
 }

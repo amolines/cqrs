@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company>Xendor</Company>
+    <Authors>Alejandro Molines Hurtado</Authors>
   </PropertyGroup>
 
   <ItemGroup>

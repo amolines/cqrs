@@ -1,26 +1,35 @@
 ﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
 using Xendor.QueryModel.Expressions;
 using Xendor.QueryModel.Expressions.EmbedCollection;
 
 namespace Xendor.QueryModel.QueryProcessor.Infrastructure
 {
-    public  class DbQueryProcessor<TCriteria, TQuery ,TOut> : IQueryProcessor<TCriteria>
+
+    public class DbQueryProcessor<TCriteria, TQuery, TOut> : IQueryProcessor<TCriteria>
         where TCriteria : IMetaDataExpression
-        where TQuery :  Query, new()
+        where TQuery : Query, new()
         where TOut : IDto
     {
         protected readonly IRepository<TOut> _repository;
+        protected readonly IQueryProcessorRegistry _queryProcessorRegistry;
 
-        public DbQueryProcessor(IRepository<TOut> repository)
+        public DbQueryProcessor(IRepository<TOut> repository, IQueryProcessorRegistry queryProcessorRegistry)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-
+            _queryProcessorRegistry = queryProcessorRegistry ?? throw new ArgumentNullException(nameof(queryProcessorRegistry));
         }
-
+        protected async Task<ICollection> ProcessAsync<T>(Criteria<T> criteria)
+            where T : IMetaDataExpression
+        {
+            var query = _queryProcessorRegistry.FindQueryProcessor<T>();
+            var response = await query.ProcessAsync(new QueryRequest<T>(criteria));
+            return response.Data; 
+        }
         protected virtual void SetEmbeds(IEmbedCollectionExpression embeds, TOut root)
         {
-
+            
         }
         public async Task<IQueryResponse> ProcessAsync(QueryRequest<TCriteria> request)
         {
@@ -68,6 +77,6 @@ namespace Xendor.QueryModel.QueryProcessor.Infrastructure
             return select;
         }
 
-      
+
     }
 }

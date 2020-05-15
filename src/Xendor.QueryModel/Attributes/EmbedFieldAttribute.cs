@@ -8,19 +8,19 @@ namespace Xendor.QueryModel.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class EmbedFieldAttribute : Attribute
     {
-        public EmbedFieldAttribute(string name, Type type)
+        public EmbedFieldAttribute(string name)
         {
             Name = name;
-            Type = type;
+
         }
 
         public string Name { get; }
-        public Type Type { get; }
 
-        public static Dictionary<string, Type> GetFields<T>()
+
+        public static IEnumerable<string> GetFields<T>()
         {
             var fields = typeof(T).GetCustomAttributes<EmbedFieldAttribute>();
-            return fields.ToDictionary(field => field.Name, field => field.Type);
+            return fields.Select(field => field.Name);
         }
 
     }

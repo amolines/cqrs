@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Xendor.QueryModel.Extensions.Collections.Generic;
 
 namespace Xendor.QueryModel.QueryProcessor
 {
@@ -14,6 +13,13 @@ namespace Xendor.QueryModel.QueryProcessor
             _data = data;
         }
         public Header Header { get; }
-        public IEnumerable Data => _data.ToReadOnly<TOut>();
+        public ICollection Data
+        {
+            get
+            {
+                var list = new List<TOut>(_data);
+                return list.AsReadOnly();
+            }
+        }
     }
 }

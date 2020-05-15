@@ -22,11 +22,7 @@ namespace CitiBank.View.Controllers
             _queryProcessorRegistry = queryProcessorRegistry ?? throw new ArgumentNullException(nameof(queryProcessorRegistry));
         }
 
-        /// <summary>
-        /// GET api/accounts
-        /// </summary>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
+     
         [HttpGet]
         [QueryAsyncActionFilter()]
         public async Task<IQueryResponse> Get(Criteria<AccountCriteria> criteria)
@@ -36,12 +32,7 @@ namespace CitiBank.View.Controllers
            return response;
         }
 
-        /// <summary>
-        /// GET api/accounts/{id}
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="criteria"></param>
-        /// <returns></returns>
+      
         [HttpGet("{id}")]
         public async Task<ActionResult<AccountDto>> Get(Guid id, Criteria<AccountCriteria> criteria)
         {
@@ -64,6 +55,7 @@ namespace CitiBank.View.Controllers
 
 
         [HttpGet("{id}/operations")]
+        [QueryAsyncActionFilter()]
         public async Task<IQueryResponse> GetOperations(Guid id, Criteria<OperationCriteria> criteria)
         {
 

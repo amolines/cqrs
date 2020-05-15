@@ -9,7 +9,7 @@ namespace Xendor.QueryModel.Expressions
     {
         private readonly ConcurrentDictionary<Type, IDictionary<string, Type>> _fields;
         private readonly ConcurrentDictionary<Type, IDictionary<string, Type>> _fullTextSearchFields;
-        private readonly ConcurrentDictionary<Type, IDictionary<string, Type>> _embedFields;
+        private readonly ConcurrentDictionary<Type, IEnumerable<string>> _embedFields;
         private static readonly Lazy<MetaDataExpressionCache>
             Lazy =
                 new Lazy<MetaDataExpressionCache>
@@ -19,7 +19,7 @@ namespace Xendor.QueryModel.Expressions
         {
             _fields = new ConcurrentDictionary<Type, IDictionary<string, Type>>();
             _fullTextSearchFields = new ConcurrentDictionary<Type, IDictionary<string, Type>>();
-            _embedFields = new ConcurrentDictionary<Type, IDictionary<string, Type>>();
+            _embedFields = new ConcurrentDictionary<Type, IEnumerable<string>>();
         }
 
 
@@ -44,7 +44,7 @@ namespace Xendor.QueryModel.Expressions
             return fields;
         }
 
-        public IDictionary<string, Type> GetEmbedFields<TMetaData>()
+        public IEnumerable<string> GetEmbedFields<TMetaData>()
             where TMetaData : IMetaDataExpression
         {
             if (_embedFields.ContainsKey(typeof(TMetaData))) return _embedFields[typeof(TMetaData)];

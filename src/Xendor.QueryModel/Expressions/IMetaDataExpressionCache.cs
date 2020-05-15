@@ -11,7 +11,7 @@ namespace Xendor.QueryModel.Expressions
         IDictionary<string, Type> GetFullTextSearchFields<TMetaData>()
             where TMetaData : IMetaDataExpression;
 
-        IDictionary<string, Type> GetEmbedFields<TMetaData>()
+        IEnumerable<string> GetEmbedFields<TMetaData>()
             where TMetaData : IMetaDataExpression;
     }
 }
