@@ -13,7 +13,6 @@ namespace Xendor.QueryModel.AspNetCore
             if (bindingContext == null)
                 throw new ArgumentNullException(nameof(bindingContext));
             var path = bindingContext.HttpContext.Request.Path;
-            var queryString = bindingContext.HttpContext.Request.QueryString.Value;
             var criteria = new Criteria<TFilter>(path, bindingContext.HttpContext.Request.Query);
             bindingContext.Result = ModelBindingResult.Success(criteria);
             return Task.CompletedTask;

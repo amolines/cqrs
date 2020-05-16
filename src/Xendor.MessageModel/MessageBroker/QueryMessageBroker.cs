@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xendor.Data;
 using Xendor.MessageBroker;
+using Xendor.MessageBroker.Exceptions;
 using Version = System.Version;
 
 namespace Xendor.MessageModel.MessageBroker
@@ -34,9 +35,10 @@ namespace Xendor.MessageModel.MessageBroker
             {
                 try
                 {
-                    var versionService = _versionServiceFactoryMethod(unitOfWork,envelope.ContentType.Split('.')[0]);
+                    var versionService = _versionServiceFactoryMethod(unitOfWork, envelope.ContentType.Split('.')[0]);
                     await versionService.SaveAndCreate(envelope);
-                    var filter = _filters.FirstOrDefault(f => f.Binding["contentType"].Value.Equals(envelope.ContentType));
+                    var filter =
+                        _filters.FirstOrDefault(f => f.Binding["contentType"].Value.Equals(envelope.ContentType));
                     if (filter != null)
                     {
                         var value = filter.Mapper(envelope);
@@ -46,9 +48,10 @@ namespace Xendor.MessageModel.MessageBroker
                     unitOfWork.Commit();
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     unitOfWork.RollBack();
+                    throw;
                 }
             }
         }

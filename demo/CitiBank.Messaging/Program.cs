@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using CitiBank.Domain.AggregatesModel.AccountAggregate.Events;
 using CitiBank.Messaging.Filters;
 using CitiBank.Messaging.Filters.Consumers;
 using Microsoft.Extensions.Configuration;
@@ -35,7 +36,7 @@ namespace CitiBank.Messaging
             messageBroker.Bind<AccountCreateQueryMessageFilter>();
             messageBroker.Bind<AccountUpdateQueryMessageFilter>();
             messageBroker.Bind<ClientUpdateQueryMessageFilter>();
-
+            messageBroker.Bind<AccountActivateQueryMessageFilter>();
 
             var rabbitConnectionStringSection = configuration.GetSection("rabbitConnectionString");
             var rabbitMqConnectionString = rabbitConnectionStringSection.Get<RabbitMqConnectionString>();
@@ -49,6 +50,7 @@ namespace CitiBank.Messaging
             eventBus.Subscribe("AccountCreated", AccountCreatedEventConsumer.ConsumerFactory(messageBroker));
             eventBus.Subscribe("AccountBalanceChanged", AccountBalanceChangedEventConsumer.ConsumerFactory(messageBroker));
             eventBus.Subscribe("AccountTransfered", AccountTransferedEventConsumer.ConsumerFactory(messageBroker));
+            eventBus.Subscribe("AccountActivated", AccountActivatedEventConsumer.ConsumerFactory(messageBroker));
         }
     }
 }

@@ -15,6 +15,7 @@ services:
      ports:
        - "7000:15672"
        - "7001:5672"
+     restart: always
   eventstore:
      image: mysql:5.7.17
      container_name: citibank.eventstore
@@ -43,44 +44,6 @@ services:
        - volume_view:/var/lib/mysql
        - ./db-init-view:/docker-entrypoint-initdb.d/
      restart: always
-  citibank.api:
-    container_name: citibank.api
-    depends_on:
-       - eventstore
-       - eventbus
-    image: ${DOCKER_REGISTRY}citibankapi
-    ports:
-       - "57886:80"
-       - "44330:443"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Demo
-    build:
-      context: .
-      dockerfile: demo/CitiBank.Api/Dockerfile
-  messaging:
-    container_name: citibank.messaging
-    image: ${DOCKER_REGISTRY}citibankmessaging
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Demo
-    depends_on:
-       - eventbus
-       - view
-    build:
-      context: .
-      dockerfile: demo/CitiBank.Messaging/Dockerfile
-  citibank.view:
-    container_name: citibank.api.view
-    depends_on:
-       - view
-    image: ${DOCKER_REGISTRY}citibankview
-    ports:
-      - "57887:80"
-      - "44331:443"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Demo
-    build:
-      context: .
-      dockerfile: demo/CitiBank.View/Dockerfile
 volumes:
     volume_view:
        name: demo-view

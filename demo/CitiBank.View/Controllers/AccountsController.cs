@@ -1,11 +1,9 @@
 ﻿using System;
+
 using System.Threading.Tasks;
 using CitiBank.View.Views.Accounts.Criterias;
 using CitiBank.View.Views.Accounts.Dtos;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using Xendor.QueryModel;
 using Xendor.QueryModel.AspNetCore;
 using Xendor.QueryModel.QueryProcessor;
@@ -44,7 +42,7 @@ namespace CitiBank.View.Controllers
 
 
          
-            if (response.Data.Any())
+            if (response.Data.Count.Equals(0))
             {
                return  (AccountDto)response.Data.GetEnumerator().Current; 
             }
