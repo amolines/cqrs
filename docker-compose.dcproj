@@ -15,4 +15,7 @@
     <None Include=".dockerignore" />
     <None Include="rabbitmq_init\definitions.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="docker-compose-demo.yml" />
+  </ItemGroup>
 </Project>

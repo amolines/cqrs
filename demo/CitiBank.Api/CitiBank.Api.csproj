@@ -11,7 +11,6 @@
     <ItemGroup>
       <ProjectReference Include="..\..\src\Xendor.CommandModel.MySql\Xendor.CommandModel.MySql.csproj" />
       <ProjectReference Include="..\..\src\Xendor.EventBus.RabbitMQ\Xendor.EventBus.RabbitMQ.csproj" />
-      <ProjectReference Include="..\..\src\Xendor.QueryModel.AspNetCore\Xendor.QueryModel.AspNetCore.csproj" />
       <ProjectReference Include="..\..\src\Xendor.ServiceLocator.SimpleInjector\Xendor.ServiceLocator.SimpleInjector.csproj" />
       <ProjectReference Include="..\CitiBank.Domain\CitiBank.Domain.csproj" />
       <ProjectReference Include="..\CitiBank.Services\CitiBank.Services.csproj" />

@@ -25,6 +25,7 @@ CREATE TABLE `accounts` (
   `Number` char(20) NOT NULL,
   `ClientId` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
+  `Activate`  tinyint(1) default 0 null,
   PRIMARY KEY (`Id`),
   KEY `fk_clientId` (`ClientId`),
   KEY `fk_productId` (`ProductId`),
