@@ -9,7 +9,9 @@ namespace Xendor.ServiceLocator
 
         void Register<TService>()
             where TService : class;
-
+        void Register<TContract, TService>(Func<TService> instanceCreator)
+            where TContract : class
+            where TService : class, TContract;
 
         void RegisterTransient<TContract, TService>()
             where TContract : class

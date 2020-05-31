@@ -45,6 +45,22 @@ namespace Xendor.ServiceLocator.SimpleInjector
             }
         }
 
+        public void Register<TContract, TService>(Func<TService> instanceCreator) 
+            where TContract : class 
+            where TService : class, TContract
+        {
+            var service = typeof(TService);
+            if (service.IsAssignableFrom<ITransientLifestyle>())
+            {
+                Container.Register(instanceCreator, Lifestyle.Transient);
+            }
+            else
+            {
+                Container.Register(instanceCreator , service.IsAssignableFrom<IScopedLifestyle>() ? Lifestyle.Scoped : Lifestyle.Singleton);
+            }
+           
+        }
+
         public void RegisterTransient<TContract, TService>() 
             where TContract : class
             where TService : class, TContract

@@ -7,12 +7,17 @@ namespace Xendor.QueryModel.QueryProcessor.Infrastructure
 {
     public class DataBase : IDataBase
     {
-        private readonly IConnection _connectionString;
+        private readonly string _connectionString;
         private readonly DbProviderFactory _dbProviderFactory;
         private DbConnection _dbConnection;
-        public DataBase(IConnection connectionString, DbProviderFactory dbProviderFactory)
+        protected DataBase(string connectionString, DbProviderFactory dbProviderFactory)
         {
-            _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new ArgumentNullException(nameof(connectionString));
+            }
+
+            _connectionString = connectionString;
             _dbProviderFactory = dbProviderFactory ?? throw new ArgumentNullException(nameof(dbProviderFactory));
             Init();
         }
@@ -21,7 +26,7 @@ namespace Xendor.QueryModel.QueryProcessor.Infrastructure
         {
             _dbConnection = _dbProviderFactory.CreateConnection();
             if (_dbConnection != null)
-                _dbConnection.ConnectionString = _connectionString.ConnectionString;
+                _dbConnection.ConnectionString = _connectionString;
             OpenAsync().Wait();
         }
         #region IConnection

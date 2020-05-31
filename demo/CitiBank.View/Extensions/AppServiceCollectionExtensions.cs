@@ -27,14 +27,13 @@ namespace CitiBank.View.Extensions
 
 
 
-            var settingsSection = configuration.GetSection("connectionString");
-            var connection = settingsSection.Get<MySqlConnection>();
-            services.Register<IConnection>(connection);
+            var connectionString = configuration["ConnectionsStrings:DefaultConnection"];
+
             /*Mappers*/
             services.RegisterSingleton<IDataMapper<AccountDto>, AccountDtoDataMapper>();
             services.RegisterSingleton<IDataMapper<OperationDto>, OperationDtoDataMapper>();
             /*Database*/
-            services.RegisterScoped<IDataBase, MySqlDataBase>();
+            services.Register<IDataBase, MySqlDataBase>(()=> new MySqlDataBase(connectionString));
             /*Repository*/
             services.RegisterScoped<IRepository<AccountDto>, Repository<AccountDto>>();
             services.RegisterScoped<IRepository<OperationDto>, Repository<OperationDto>>();
